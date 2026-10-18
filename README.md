@@ -23,7 +23,6 @@ Open [localhost:4173](http://localhost:4173). Use `?theme=matrix` to open the da
 | `dist/theme.js` | Saved theme preferences |
 | `dist/matrix-rain.js` | Background animation |
 | `dist/app.js` | Project rendering, guestbook, and navigation |
-| `dist/windows.js` | Dragging, keyboard movement, and saved window positions |
 | `dist/assets/` | Wallpaper and favicon |
 
 Add an object to `window.PORTFOLIO_PROJECTS` to add a project. Set `pending: true` if its website is still in development. Reload the browser after editing.
@@ -37,14 +36,9 @@ node --check dist/app.js
 node --check dist/theme.js
 node --check dist/matrix-rain.js
 node tests/theme.test.cjs
-node tests/windows.test.cjs
 ```
 
 The theme checks cover preferences, direct links, unavailable storage, reduced motion, pause/resume, hidden tabs, and animation scheduling. Check layout separately in a browser.
-
-## Windows
-
-Drag the Work and Guestbook title bars to reposition them. Positions are saved on the device. Double-click a title bar to reset that window, or choose **Reset layout** in the navigation menu to reset both. With a title bar focused, use arrow keys to move, Shift for larger steps, and Home to reset. Escape cancels a drag.
 
 ## Guestbook
 

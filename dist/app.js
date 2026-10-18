@@ -74,7 +74,7 @@ const startButton = document.querySelector('#start-button');
 const startMenu = document.querySelector('#start-menu');
 function closeStart() { startMenu.hidden = true; startButton.setAttribute('aria-expanded', 'false'); }
 startButton.addEventListener('click', () => { startMenu.hidden = !startMenu.hidden; startButton.setAttribute('aria-expanded', String(!startMenu.hidden)); });
-startMenu.querySelectorAll('a, button').forEach(link => link.addEventListener('click', closeStart));
+startMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeStart));
 document.addEventListener('click', event => { if (!startMenu.contains(event.target) && !startButton.contains(event.target)) closeStart(); });
 document.addEventListener('keydown', event => { if (event.key === 'Escape') closeStart(); });
 const motionButton = document.querySelector('#motion-toggle');
