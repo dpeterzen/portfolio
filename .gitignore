@@ -1,0 +1,19 @@
+# Private hosting workspace and configuration
+/daniels-world/
+/.openai/
+/.sites-*/
+
+# Local credentials and environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local dependencies, caches, and preview artifacts
+node_modules/
+.DS_Store
+__pycache__/
+/portfolio-preview.jpg
+/tmp/
+*.log
