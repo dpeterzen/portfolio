@@ -23,7 +23,7 @@ Open [localhost:4173](http://localhost:4173). Use `?theme=matrix` to open the da
 | `dist/theme.js` | Saved theme preferences |
 | `dist/matrix-rain.js` | Background animation |
 | `dist/app.js` | Project rendering, guestbook, and navigation |
-| `dist/windows.js` | Dragging, keyboard movement, and saved window positions |
+| `dist/windows.js` | Moving, resizing, minimizing, maximizing, closing, and saved layouts |
 | `dist/assets/` | Wallpaper and favicon |
 
 Add an object to `window.PORTFOLIO_PROJECTS` to add a project. Set `pending: true` if its website is still in development. Reload the browser after editing.
@@ -44,7 +44,14 @@ The theme checks cover preferences, direct links, unavailable storage, reduced m
 
 ## Windows
 
-Drag the Work and Guestbook title bars to reposition them. Positions are saved on the device. Double-click a title bar to reset that window, or choose **Reset layout** in the navigation menu to reset both. With a title bar focused, use arrow keys to move, Shift for larger steps, and Home to reset. Escape cancels a drag.
+Drag title bars to move windows and drag any edge to resize. Size, position, and window state are saved on the device.
+
+- Minimize keeps a window in the taskbar; select its taskbar button to restore it.
+- Maximize fills the available screen. Select Restore, or double-click the title bar, to return to the previous size and position.
+- Close removes the taskbar button. Reopen the window from Work or Guestbook in the header or menu.
+- Reset layout in the menu opens both windows at their original size and position.
+
+With a title bar focused, arrow keys move the window. With the bottom-right resize handle focused, arrow keys resize it. Shift uses larger steps; Home resets the window. Escape cancels a move or resize.
 
 ## Guestbook
 
@@ -56,4 +63,4 @@ Serve `dist/` with a static host; no build step is required. Pushing to GitHub d
 
 ## Artwork
 
-The wallpaper was generated with an early-2000s Frutiger Aero landscape prompt: blue sky, green hills, a river, a glass city, and iridescent bubbles. The miniature canvases are CSS illustrations, not reproductions of Ruthie’s paintings.
+The wallpaper was generated with an early-2000s Frutiger Aero landscape prompt: blue sky, green hills, a river, a glass city, and iridescent bubbles. The interface uses text labels without decorative logos or icons.

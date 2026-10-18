@@ -1,10 +1,5 @@
 'use strict';
 
-const icons = {
-  tiles: '<div class="tile-logo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="tile-wordmark" aria-hidden="true">tile<span>recall</span><sup>✧</sup></span>',
-  paintings: '<div class="art-gallery" aria-hidden="true"><div class="painting painting-one"><span></span><i></i></div><div class="painting painting-two"><div class="flower f1">✿</div><div class="flower f2">✿</div><div class="flower f3">✿</div><span></span></div><div class="painting painting-three"><span></span><i></i></div></div>'
-};
-
 const grid = document.querySelector('#project-grid');
 for (const project of window.PORTFOLIO_PROJECTS) {
   const card = document.createElement('a');
@@ -12,24 +7,26 @@ for (const project of window.PORTFOLIO_PROJECTS) {
   card.href = project.url;
   card.target = '_blank';
   card.rel = 'noopener noreferrer';
-  card.setAttribute('aria-label', `${project.name} — ${project.pending ? 'in development, website not live yet' : 'open website'} (opens in a new tab)`);
-  const preview = document.createElement('div');
-  preview.className = `project-preview ${project.visual}`;
-  preview.innerHTML = icons[project.visual] || '';
+  card.setAttribute('aria-label', `${project.name} — ${project.pending ? 'in development' : 'open website'} (opens in a new tab)`);
+  const details = document.createElement('div');
+  details.className = 'project-details';
+  const title = document.createElement('h3');
+  title.textContent = project.name;
+  details.append(title);
   if (project.pending) {
     const badge = document.createElement('span');
     badge.className = 'project-badge pending';
     badge.textContent = 'In development';
-    preview.append(badge);
+    details.append(badge);
   }
-  const details = document.createElement('div');
-  details.className = 'project-details';
-  const title = document.createElement('h3'); title.textContent = project.name;
-  const desc = document.createElement('p'); desc.className = 'project-description'; desc.textContent = project.description;
-  const link = document.createElement('span'); link.className = 'project-link'; link.textContent = new URL(project.url).hostname;
-  link.innerHTML += '<svg aria-hidden="true"><use href="#i-arrow"/></svg>';
-  details.append(title, desc, link);
-  card.append(preview, details);
+  const description = document.createElement('p');
+  description.className = 'project-description';
+  description.textContent = project.description;
+  const link = document.createElement('span');
+  link.className = 'project-link';
+  link.textContent = new URL(project.url).hostname;
+  details.append(description, link);
+  card.append(details);
   grid.append(card);
 }
 const storageKey = 'daniels-world-guestbook-v1';
