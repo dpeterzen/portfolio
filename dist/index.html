@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#67b7ed">
-  <meta name="description" content="Projects, websites, and experiments by Daniel. Explore TileRecall, Ruthie Paintings, and work in progress.">
-  <title>Daniel’s World — projects & experiments</title>
+  <meta name="description" content="Websites and independent projects by Daniel Peterson. TileRecall and Ruthie Paintings.">
+  <title>Daniel Peterson — Portfolio</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css">
@@ -15,76 +15,36 @@
   <script src="matrix-rain.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#projects">Skip to projects</a>
+  <a class="skip-link" href="#projects">Skip to work</a>
   <div class="landscape" aria-hidden="true"></div>
   <div class="sky-wash" aria-hidden="true"></div>
   <canvas id="matrix-rain" aria-hidden="true"></canvas>
   <div class="matrix-grid" aria-hidden="true"></div>
   <div class="matrix-scanlines" aria-hidden="true"></div>
-  <div class="floating-bubbles" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="floating-bubbles" aria-hidden="true"><span></span><span></span></div>
   <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V5a1 1 0 0 1 1-1h6l2 3h8a1 1 0 0 1 1 1v11H3Z" fill="#f5cc62" stroke="#aa812e"/><path d="M2 9h20l-2 10H3Z" fill="#ffe19a" stroke="#b58d3e"/><path d="M4 10h15" stroke="#fff7d8"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7Z" fill="currentColor"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-note" viewBox="0 0 24 24"><path d="M4 4h16v12h-9l-5 4v-4H4Z" fill="#e9fbff" stroke="#5c96b0" stroke-width="1.3"/><path d="M8 8h8M8 11h6" stroke="#6ca8be" stroke-linecap="round"/></symbol>
-    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4" fill="#9adaf7" stroke="#438cbb"/><path d="M4 21v-3a8 8 0 0 1 16 0v3" fill="#64b4ed" stroke="#438cbb"/></symbol>
-    <symbol id="i-grid" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" fill="currentColor"/></symbol>
-    <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 5h3v3H4zM4 11h3v3H4zM4 17h3v3H4zM10 5h10v3H10zM10 11h10v3H10zM10 17h10v3H10z" fill="currentColor"/></symbol>
   </svg>
-  <div class="site-shell">
+  <div class="site-shell" id="home">
     <header class="topbar glass">
-      <a class="brand" href="#home" aria-label="Daniel’s World home"><span class="world-orb" aria-hidden="true"><span>✦</span></span><span>daniel’s world<span class="brand-dot">.</span></span></a>
-      <nav aria-label="Main navigation"><a href="#projects" class="active">My projects</a><a href="#about">About me</a><a href="#guestbook">Guestbook</a></nav>
+      <a class="brand" href="#home" aria-label="Portfolio home"><span class="brand-orb" aria-hidden="true">✦</span><span>portfolio</span></a>
+      <nav aria-label="Main navigation"><a href="#projects">Work</a><a href="#guestbook">Guestbook</a></nav>
       <div class="theme-switch" role="group" aria-label="Color theme"><button type="button" data-theme-choice="vista" aria-pressed="true" title="Switch to Vista light mode"><span aria-hidden="true">☼</span> Vista</button><button type="button" data-theme-choice="matrix" aria-pressed="false" title="Switch to Matrix dark mode"><span aria-hidden="true">⌁</span> Matrix</button></div>
     </header>
-
-    <main id="home">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="status-dot"></span> PROJECTS · WEBSITES · EXPERIMENTS</p>
-          <h1 id="hero-title">Projects, ideas,<br>and experiments<span class="hero-period">.</span></h1>
-          <p class="hero-description">Websites I’m building, projects in progress,<br>and new work as it develops.</p>
-          <a class="explore-link" href="#projects">Explore my projects <span aria-hidden="true">↘</span></a>
-        </div>
-        <div class="hero-sticker" aria-hidden="true"><span class="sticker-spark">✧</span><span>work in<br>progress</span><svg viewBox="0 0 80 45"><path d="M5 5c12 33 50 34 65 14m-17 1 19-3-5 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <div class="matrix-mark" aria-hidden="true"><div class="signal-sphere"><i></i><i></i><i></i><span>◈</span></div><span class="signal-caption">FOLLOW THE SIGNAL</span><span class="signal-status"><span class="status-dot"></span> SYSTEM ONLINE</span></div>
-        <div class="desktop-shortcuts" aria-label="Desktop shortcuts">
-          <a href="#projects"><span class="shortcut-icon folder-icon"><svg><use href="#i-folder"/></svg></span><span>My projects</span></a>
-          <a href="#guestbook"><span class="shortcut-icon message-icon"><svg><use href="#i-note"/></svg></span><span>Say hello</span></a>
-        </div>
-      </section>
-
+    <main>
+      <section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><h1 id="hero-title">Daniel Peterson<span class="hero-period">.</span></h1><p class="hero-description">Websites and independent projects.</p></div><div class="matrix-mark" aria-hidden="true"><div class="signal-sphere"><i></i><i></i><i></i><span>◈</span></div></div></section>
       <div class="desktop-layout">
-        <section class="window projects-window" id="projects" aria-labelledby="projects-title">
-          <div class="window-titlebar"><h2 id="projects-title"><svg><use href="#i-folder"/></svg> My projects</h2><span class="window-controls" aria-hidden="true"><span>−</span><span>□</span><span>×</span></span></div>
-          <div class="window-body">
-            <div class="explorer-path"><span aria-hidden="true">← &nbsp; →</span><div><svg><use href="#i-folder"/></svg><span>Daniel</span><span class="path-chevron">›</span><strong>My projects</strong></div><span class="path-spark" aria-hidden="true">✧</span></div>
-            <div class="section-intro"><div><h3>Selected projects</h3><p>Current work and ongoing experiments.</p></div><div class="view-switch" role="group" aria-label="Project view"><button class="selected" type="button" data-view="grid" aria-label="Grid view" aria-pressed="true"><svg><use href="#i-grid"/></svg></button><button type="button" data-view="list" aria-label="List view" aria-pressed="false"><svg><use href="#i-list"/></svg></button></div></div>
-            <div class="project-grid" id="project-grid"></div>
-            <div class="explorer-status"><span><span class="status-dot"></span> <span id="project-count">2 projects · more to come</span></span><span>Independent projects <span aria-hidden="true">✧</span></span></div>
-          </div>
-        </section>
-
-        <aside class="sidebar">
-          <section class="window about-window" id="about" aria-labelledby="about-title">
-            <div class="window-titlebar"><h2 id="about-title"><svg><use href="#i-person"/></svg> About me</h2><span class="tiny-spark" aria-hidden="true">✧</span></div>
-            <div class="about-content"><span class="avatar-orb" aria-hidden="true">d<span>✦</span></span><div><h3>I’m Daniel <span class="wave" aria-hidden="true">✳</span></h3><p>I build websites<br>and explore new ideas.</p></div></div>
-            <div class="about-bottom"><p>This is where I share my projects and work in progress.</p><span class="small-tag"><span class="status-dot"></span> currently building</span></div>
-          </section>
-          <section class="window guestbook-window" id="guestbook" aria-labelledby="guestbook-title">
-            <div class="window-titlebar"><h2 id="guestbook-title"><svg><use href="#i-note"/></svg> The guestbook</h2><span class="tiny-spark" aria-hidden="true">♡</span></div>
-            <div class="guestbook-content"><p class="guestbook-heading">Leave a message or share what you’re working on.</p><div class="guestbook-notes" id="guestbook-notes"><div class="empty-note"><span aria-hidden="true">✎</span><p>No messages yet.<br><span>Add the first message.</span></p></div></div><button class="aero-button" id="open-guestbook" type="button"><svg><use href="#i-note"/></svg> Leave a message <span aria-hidden="true">↗</span></button><p class="local-label">Guestbook preview · notes stay in this browser</p></div>
-          </section>
-        </aside>
+        <section class="window projects-window" id="projects" aria-labelledby="projects-title"><div class="window-titlebar"><h2 id="projects-title"><svg aria-hidden="true"><use href="#i-folder"/></svg> Work</h2><span class="window-controls" aria-hidden="true"><span>−</span><span>□</span><span>×</span></span></div><div class="window-body"><div class="project-grid" id="project-grid"></div></div></section>
+        <aside><section class="window guestbook-window" id="guestbook" aria-labelledby="guestbook-title"><div class="window-titlebar"><h2 id="guestbook-title"><svg aria-hidden="true"><use href="#i-note"/></svg> Guestbook</h2></div><div class="guestbook-content"><div class="guestbook-notes" id="guestbook-notes"><p class="empty-note">No messages yet.</p></div><button class="aero-button" id="open-guestbook" type="button">Leave a message <svg aria-hidden="true"><use href="#i-arrow"/></svg></button><p class="local-label">Stored on this device only.</p></div></section></aside>
       </div>
-      <footer class="page-footer"><p>Daniel’s projects & experiments.</p><span>Thanks for visiting <span aria-hidden="true">♡</span></span></footer>
+      <footer class="page-footer"><a href="https://github.com/dpeterzen/portfolio" target="_blank" rel="noopener noreferrer" aria-label="Source on GitHub (opens in a new tab)">Source on GitHub <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></footer>
     </main>
   </div>
-
-  <div class="taskbar"><div class="taskbar-inner"><div class="taskbar-left"><button class="start-orb" id="start-button" aria-expanded="false" aria-controls="start-menu" aria-label="Open start menu"><span aria-hidden="true">✦</span></button><span class="taskbar-divider"></span><a class="taskbar-tab" href="#projects"><svg><use href="#i-folder"/></svg><span>Daniel’s World</span></a><span class="taskbar-welcome">projects · experiments · work in progress</span></div><div class="system-tray"><button id="motion-toggle" class="tray-button" aria-pressed="false" title="Pause background motion"><span aria-hidden="true">◌</span><span id="motion-label">Motion on</span></button><span class="tray-divider"></span><time id="clock"></time><span class="show-desktop" aria-hidden="true"></span></div></div></div>
-  <nav class="start-menu glass" id="start-menu" aria-label="Start menu" hidden><p><span class="world-orb" aria-hidden="true">✦</span> Daniel’s World</p><a href="#projects"><svg><use href="#i-folder"/></svg> Explore my projects <span>→</span></a><a href="#about"><svg><use href="#i-person"/></svg> About me <span>→</span></a><a href="#guestbook"><svg><use href="#i-note"/></svg> Sign the guestbook <span>→</span></a><small>Projects, background, and guestbook.</small></nav>
-
-  <dialog id="note-dialog" aria-labelledby="note-dialog-title"><div class="window-titlebar"><h2 id="note-dialog-title"><svg><use href="#i-note"/></svg> Sign the guestbook</h2><button type="button" id="close-dialog" aria-label="Close guestbook form">×</button></div><form id="note-form"><p>Share feedback, ask a question, or tell me about your own projects.</p><label for="note-name">Your name</label><input id="note-name" name="name" maxlength="32" placeholder="Name or nickname" required autocomplete="nickname"><label for="note-message">Your message</label><textarea id="note-message" name="message" maxlength="280" rows="4" placeholder="Write your message…" required></textarea><div class="form-meta"><span>Saved only in this browser.</span><span id="character-count">0 / 280</span></div><p id="form-error" role="alert" hidden></p><button class="aero-button" type="submit">Save message <span aria-hidden="true">↗</span></button></form></dialog>
+  <div class="taskbar"><div class="taskbar-inner"><div class="taskbar-left"><button class="start-orb" id="start-button" aria-expanded="false" aria-controls="start-menu" aria-label="Open navigation"><span aria-hidden="true">✦</span></button><span class="taskbar-divider"></span><a class="taskbar-tab" href="#projects"><svg aria-hidden="true"><use href="#i-folder"/></svg> Portfolio</a></div><div class="system-tray"><button id="motion-toggle" class="tray-button" aria-pressed="false" title="Pause background motion"><span aria-hidden="true">◌</span><span id="motion-label">Motion on</span></button><span class="tray-divider"></span><time id="clock"></time></div></div></div>
+  <nav class="start-menu glass" id="start-menu" aria-label="Navigation" hidden><a href="#projects"><svg aria-hidden="true"><use href="#i-folder"/></svg> Work <span aria-hidden="true">→</span></a><a href="#guestbook"><svg aria-hidden="true"><use href="#i-note"/></svg> Guestbook <span aria-hidden="true">→</span></a></nav>
+  <dialog id="note-dialog" aria-labelledby="note-dialog-title"><div class="window-titlebar"><h2 id="note-dialog-title">Message</h2><button type="button" id="close-dialog" aria-label="Close message form">×</button></div><form id="note-form"><label for="note-name">Name</label><input id="note-name" name="name" maxlength="32" placeholder="Name or nickname" required autocomplete="nickname"><label for="note-message">Message</label><textarea id="note-message" name="message" maxlength="280" rows="4" placeholder="Write a message" required></textarea><div class="form-meta"><span>Stored on this device only.</span><span id="character-count">0 / 280</span></div><p id="form-error" role="alert" hidden></p><button class="aero-button" type="submit">Save message <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></form></dialog>
   <div id="toast" role="status" class="toast" hidden></div>
 </body>
 </html>

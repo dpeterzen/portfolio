@@ -1,8 +1,8 @@
 'use strict';
 
 const icons = {
-  tiles: '<div class="tile-logo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="tile-wordmark" aria-hidden="true">tile<span>recall</span><sup>✧</sup></span><span class="preview-caption">currently in development</span>',
-  paintings: '<div class="art-gallery" aria-hidden="true"><div class="painting painting-one"><span></span><i></i></div><div class="painting painting-two"><div class="flower f1">✿</div><div class="flower f2">✿</div><div class="flower f3">✿</div><span></span></div><div class="painting painting-three"><span></span><i></i></div></div><span class="gallery-caption" aria-hidden="true">Ruthie Paintings</span>'
+  tiles: '<div class="tile-logo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="tile-wordmark" aria-hidden="true">tile<span>recall</span><sup>✧</sup></span>',
+  paintings: '<div class="art-gallery" aria-hidden="true"><div class="painting painting-one"><span></span><i></i></div><div class="painting painting-two"><div class="flower f1">✿</div><div class="flower f2">✿</div><div class="flower f3">✿</div><span></span></div><div class="painting painting-three"><span></span><i></i></div></div>'
 };
 
 const grid = document.querySelector('#project-grid');
@@ -16,36 +16,22 @@ for (const project of window.PORTFOLIO_PROJECTS) {
   const preview = document.createElement('div');
   preview.className = `project-preview ${project.visual}`;
   preview.innerHTML = icons[project.visual] || '';
-  const badge = document.createElement('span');
-  badge.className = `project-badge${project.pending ? ' pending' : ''}`;
-  badge.textContent = project.status;
-  preview.append(badge);
+  if (project.pending) {
+    const badge = document.createElement('span');
+    badge.className = 'project-badge pending';
+    badge.textContent = 'In development';
+    preview.append(badge);
+  }
   const details = document.createElement('div');
   details.className = 'project-details';
-  const category = document.createElement('p'); category.className = 'project-category'; category.textContent = project.category;
-  const title = document.createElement('h4'); title.textContent = project.name;
+  const title = document.createElement('h3'); title.textContent = project.name;
   const desc = document.createElement('p'); desc.className = 'project-description'; desc.textContent = project.description;
-  const link = document.createElement('span'); link.className = 'project-link'; link.textContent = project.linkText;
+  const link = document.createElement('span'); link.className = 'project-link'; link.textContent = new URL(project.url).hostname;
   link.innerHTML += '<svg aria-hidden="true"><use href="#i-arrow"/></svg>';
-  details.append(category, title, desc, link);
+  details.append(title, desc, link);
   card.append(preview, details);
   grid.append(card);
 }
-const futureCard = document.createElement('div');
-futureCard.className = 'project-card future-card';
-futureCard.innerHTML = '<div class="project-preview future"><span class="future-spark s1">✧</span><svg aria-hidden="true"><use href="#i-folder"/></svg><span class="future-spark s2">✧</span><span class="future-label">more to come</span></div><div class="project-details"><p class="project-category">UPCOMING WORK</p><h4>Future projects</h4><p class="project-description">More work will appear here as it takes shape.</p><span class="future-footer">More projects to come <span aria-hidden="true">✧</span></span></div>';
-grid.append(futureCard);
-document.querySelector('#project-count').textContent = `${window.PORTFOLIO_PROJECTS.length} projects · more to come`;
-
-document.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
-  grid.classList.toggle('list-view', button.dataset.view === 'list');
-  document.querySelectorAll('[data-view]').forEach(other => {
-    const selected = button === other;
-    other.classList.toggle('selected', selected);
-    other.setAttribute('aria-pressed', String(selected));
-  });
-}));
-
 const storageKey = 'daniels-world-guestbook-v1';
 let notes = [];
 try {
@@ -75,12 +61,12 @@ document.querySelector('#note-form').addEventListener('submit', event => {
   const name = document.querySelector('#note-name').value.trim();
   const text = message.value.trim();
   const error = document.querySelector('#form-error');
-  if (!name || !text) { error.hidden = false; error.textContent = 'Add your name and a message first.'; return; }
+  if (!name || !text) { error.hidden = false; error.textContent = 'Enter a name and message.'; return; }
   const nextNotes = [{name: name.slice(0, 32), message: text.slice(0, 280)}, ...notes].slice(0, 30);
-  try { localStorage.setItem(storageKey, JSON.stringify(nextNotes)); } catch { error.hidden = false; error.textContent = 'Your browser couldn’t save this note. Enable browser storage and try again.'; return; }
+  try { localStorage.setItem(storageKey, JSON.stringify(nextNotes)); } catch { error.hidden = false; error.textContent = 'Couldn’t save. Check your browser storage.'; return; }
   notes = nextNotes; renderNotes(); dialog.close(); event.target.reset(); error.hidden = true;
   document.querySelector('#character-count').textContent = '0 / 280';
-  const toast = document.querySelector('#toast'); toast.textContent = 'Your message has been saved in this browser.'; toast.hidden = false;
+  const toast = document.querySelector('#toast'); toast.textContent = 'Message saved on this device.'; toast.hidden = false;
   window.setTimeout(() => { toast.hidden = true; }, 4200);
 });
 
@@ -105,7 +91,3 @@ function updateClock() {
   clock.dateTime = now.toISOString(); clock.title = now.toLocaleDateString([], {dateStyle: 'full'});
 }
 updateClock(); window.setInterval(updateClock, 30000);
-
-document.querySelectorAll('.topbar nav a').forEach(link => link.addEventListener('click', () => {
-  document.querySelectorAll('.topbar nav a').forEach(item => item.classList.toggle('active', item === link));
-}));

@@ -1,39 +1,35 @@
-# Daniel’s World
+# Portfolio
 
-A personal portfolio with Windows Vista glass, a surreal landscape, and an optional Matrix theme. Links to [TileRecall](https://tilerecall.com) (in development) and [Ruthie Paintings](https://ruthiepaintings.com), with space for future projects.
+Daniel Peterson’s portfolio. Static HTML, CSS, and JavaScript, with Vista and Matrix themes.
 
-Plain HTML, CSS, and JavaScript. No build step or dependency installation is required.
-
-## Run locally
+## Run
 
 ```sh
-git clone https://github.com/dpeterzen/daniels-world.git
-cd daniels-world
+git clone https://github.com/dpeterzen/portfolio.git
+cd portfolio
 python3 -m http.server 4173 --directory dist
 ```
 
-Open [localhost:4173](http://localhost:4173). For the dark theme, open [localhost:4173/?theme=matrix](http://localhost:4173/?theme=matrix).
+Open [localhost:4173](http://localhost:4173). Use `?theme=matrix` to open the dark theme directly.
 
-## Make changes
+## Edit
 
-| File | What to edit |
+| File | Purpose |
 | --- | --- |
-| `dist/index.html` | Page layout, headings, navigation, and copy |
+| `dist/index.html` | Layout and copy |
 | `dist/projects.js` | Project names, descriptions, links, and status |
-| `dist/styles.css` | Vista styling and responsive layouts |
-| `dist/matrix.css` | Matrix dark theme |
-| `dist/theme.js` | Theme selection and saved preferences |
-| `dist/matrix-rain.js` | Digital rain and motion behavior |
-| `dist/app.js` | Project rendering, guestbook, and desktop controls |
+| `dist/styles.css` | Vista styling and responsive layout |
+| `dist/matrix.css` | Matrix theme |
+| `dist/theme.js` | Saved theme preferences |
+| `dist/matrix-rain.js` | Background animation |
+| `dist/app.js` | Project rendering, guestbook, and navigation |
 | `dist/assets/` | Wallpaper and favicon |
 
-To add a project, add an object to `window.PORTFOLIO_PROJECTS` in `dist/projects.js`. Set `pending: true` for a website that is not live yet. The future-project card follows the configured projects automatically.
+Add an object to `window.PORTFOLIO_PROJECTS` to add a project. Set `pending: true` if its website is still in development. Reload the browser after editing.
 
-Reload the browser after editing; this is a static site without hot reloading.
+## Check
 
-## Check changes
-
-With Node.js installed, run:
+Requires Node.js:
 
 ```sh
 node --check dist/app.js
@@ -42,22 +38,16 @@ node --check dist/matrix-rain.js
 node tests/theme.test.cjs
 ```
 
-The theme checks use a simulated browser to verify saved preferences, direct theme links, unavailable storage, reduced motion, pause/resume, hidden tabs, and animation scheduling. They do not replace checking the layout in a browser.
-
-## Themes
-
-Use **Vista / Matrix** in the header. Vista is the default; explicit selections are remembered on the device. `?theme=matrix` opens the dark theme directly without replacing a saved preference.
-
-Matrix includes smoked glass, phosphor-green accents, a wireframe sphere, scanlines, and canvas code rain. The motion control pauses animations. Reduced-motion preferences show a still rain pattern; animation stops in hidden tabs and in Vista mode.
+The theme checks cover preferences, direct links, unavailable storage, reduced motion, pause/resume, hidden tabs, and animation scheduling. Check layout separately in a browser.
 
 ## Guestbook
 
-The guestbook is a browser-local prototype. Messages stay in localStorage on the visitor’s device and are not shared between visitors. The interface labels this limitation. A shared guestbook would require a backend.
+Messages are stored only on the visitor’s device. They are not shared between visitors. A shared guestbook requires a backend.
 
-## Deploy
+## Hosting
 
-Serve the contents of `dist/` using a static host. There is no build command. The GitHub repository contains the public website source; it does not automatically update the existing hosted preview. Private hosting configuration and credentials are excluded.
+Serve `dist/` with a static host; no build step is required. Pushing to GitHub does not automatically deploy the hosted preview. Hosting credentials and configuration are excluded from this repository.
 
 ## Artwork
 
-`dist/assets/dreamscape.jpg` is an original wallpaper made with the built-in image generation tool. Its prompt described a surreal early-2000s Frutiger Aero / Windows Vista landscape with saturated blue sky, white clouds, luminous green hills, a winding turquoise river, a distant glass city, and iridescent bubbles. The miniature canvases on the Ruthie Paintings card are CSS illustrations, not reproductions of Ruthie’s work.
+The wallpaper was generated with an early-2000s Frutiger Aero landscape prompt: blue sky, green hills, a river, a glass city, and iridescent bubbles. The miniature canvases are CSS illustrations, not reproductions of Ruthie’s paintings.

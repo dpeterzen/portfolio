@@ -18,8 +18,8 @@
 [data-theme=matrix] .glass{background:linear-gradient(180deg,#153324df,#071b13e6);border-color:#4c9a6b80;box-shadow:0 5px 25px #0007,inset 0 1px #8cffb21c}
 [data-theme=matrix] .brand{color:#d3ffe0;letter-spacing:-.6px}
 [data-theme=matrix] .brand-dot{color:#65ff9b;text-shadow:0 0 12px #30ff7d}
-[data-theme=matrix] .world-orb,[data-theme=matrix] .start-orb{background:radial-gradient(ellipse at 32% 20%,#d9ffe0,#58de8a 15%,#1e7149 38%,#092c1d 69%,#46d689 100%);border-color:#4c9d69;box-shadow:inset 0 0 0 1px #afffc933,0 0 17px #2ce87a26;color:#c0ffd4;text-shadow:0 0 10px #8effb3}
-[data-theme=matrix] .world-orb:after{background:linear-gradient(#d1ffe540,#d1ffe505)}
+[data-theme=matrix] .brand-orb,[data-theme=matrix] .start-orb{background:radial-gradient(ellipse at 32% 20%,#d9ffe0,#58de8a 15%,#1e7149 38%,#092c1d 69%,#46d689 100%);border-color:#4c9d69;box-shadow:inset 0 0 0 1px #afffc933,0 0 17px #2ce87a26;color:#c0ffd4;text-shadow:0 0 10px #8effb3}
+[data-theme=matrix] .brand-orb:after{background:linear-gradient(#d1ffe540,#d1ffe505)}
 [data-theme=matrix] .topbar nav a{color:#a7cbb7}
 [data-theme=matrix] .topbar nav a.active,[data-theme=matrix] .topbar nav a:hover{background:linear-gradient(#1e4c34,#102c1d);color:#baffcf;border-color:#417955;box-shadow:inset 0 1px #a6ffcb12}
 [data-theme=matrix] .theme-switch{background:#020f09;border-color:#315b40;box-shadow:inset 0 1px 4px #0005}
@@ -81,7 +81,7 @@
 [data-theme=matrix] .future-label,[data-theme=matrix] .future-spark{color:#78a887}
 [data-theme=matrix] .future>svg{opacity:.65}
 [data-theme=matrix] .project-category{color:#7fab8e;font-family:var(--mono)}
-[data-theme=matrix] .project-details h4,[data-theme=matrix] .future-card .project-details h4{color:#c4ebcf}
+[data-theme=matrix] .project-details h3,[data-theme=matrix] .future-card .project-details h3{color:#c4ebcf}
 [data-theme=matrix] .project-description{color:#9bb4a3}
 [data-theme=matrix] .project-link{color:#86d8a3;border-color:#29432f}
 [data-theme=matrix] .future-card{background:#0a1810}
@@ -128,7 +128,23 @@
 @media(max-width:1080px){.topbar{gap:17px}.topbar nav{margin-left:0}.topbar nav a{padding:9px 11px}.theme-switch{margin-left:auto}.theme-switch button{padding:6px 7px;font-size:9px}[data-theme=matrix] .matrix-mark{right:206px}}
 @media(max-width:850px){.topbar{gap:10px;padding-left:13px;padding-right:13px}.brand{font-size:19px;gap:8px}.topbar nav{gap:0}.topbar nav a{padding:9px 9px;font-size:11px}.theme-switch button{padding:6px;font-size:8px}[data-theme=matrix] .matrix-mark{right:22px;top:125px}.signal-sphere{width:115px;height:115px}.signal-caption{font-size:6px;letter-spacing:2px;margin-top:18px}.signal-status{font-size:6px}}
 @media(max-width:600px){.topbar{gap:12px;padding:12px 14px}.brand{font-size:19px;margin:0;margin-right:auto}.theme-switch{order:2;margin:0}.theme-switch button{font-size:9px;padding:6px 7px}.theme-switch button>span{font-size:13px}.topbar nav{order:3;margin:0;gap:8px;border-color:#abcdd67d}.topbar nav a{font-size:11px;padding:6px 14px}[data-theme=matrix] .topbar nav{border-color:#365d42}[data-theme=matrix] .matrix-mark{display:none}[data-theme=matrix] .window-titlebar h2{font-size:9px}[data-theme=matrix] .explorer-path{font-size:9px}[data-theme=matrix] .eyebrow{font-size:7px;letter-spacing:1px}.theme-switch{max-width:100%}}
-@media(max-width:370px){.topbar{padding:12px 10px;gap:9px}.brand{font-size:17px;gap:6px}.brand .world-orb{width:26px;height:26px;font-size:22px}.theme-switch button{font-size:8px;padding:6px}.theme-switch button>span{font-size:11px}}
+@media(max-width:370px){.topbar{padding:12px 10px;gap:9px}.brand{font-size:17px;gap:6px}.brand .brand-orb{width:26px;height:26px;font-size:22px}.theme-switch button{font-size:8px;padding:6px}.theme-switch button>span{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.signal-sphere i{animation:none}}
 @media(min-width:601px) and (max-width:720px){.topbar{height:auto;padding:12px 16px;flex-wrap:wrap;gap:12px}.brand{margin-right:auto}.theme-switch{order:2;margin:0}.topbar nav{order:3;width:100%;height:auto;margin:0;justify-content:center;padding-top:9px;border-top:1px solid #abcdd67d}[data-theme=matrix] .topbar nav{border-color:#365d42}}
-@media(max-width:400px){.topbar{padding:12px 10px;gap:9px}.brand{font-size:17px;gap:6px}.brand .world-orb{width:26px;height:26px;font-size:22px}.theme-switch button{font-size:8px;padding:6px}.theme-switch button>span{font-size:11px}}
+@media(max-width:400px){.topbar{padding:12px 10px;gap:9px}.brand{font-size:17px;gap:6px}.brand .brand-orb{width:26px;height:26px;font-size:22px}.theme-switch button{font-size:8px;padding:6px}.theme-switch button>span{font-size:11px}}
+
+/* Compact portfolio composition. */
+[data-theme=matrix] .matrix-mark{right:65px;top:39px}
+[data-theme=matrix] .signal-sphere{height:125px;width:125px}
+[data-theme=matrix] .hero-description{font-size:14px}
+[data-theme=matrix] .empty-note{background:transparent;border:0;color:#9abaA5}
+[data-theme=matrix] .project-details h3{font-size:21px;font-weight:500}
+[data-theme=matrix] .project-description{font-size:12px}
+[data-theme=matrix] .project-link{font-size:11px}
+[data-theme=matrix] .page-footer{color:#9abfa5}
+.topbar nav{margin-left:0}
+@media(max-width:850px){.brand{font-size:20px}.topbar nav a{font-size:12px;padding:8px 12px}}
+@media(max-width:780px){[data-theme=matrix] .matrix-mark{right:10px;top:39px}}
+@media(max-width:600px){[data-theme=matrix] .matrix-mark{display:none}}
+@media(max-width:520px){.brand{font-size:20px}.brand .brand-orb{height:28px;width:28px;font-size:23px}.theme-switch{order:2}.topbar nav{order:3;margin:0}.topbar nav a{font-size:11px;padding:5px 22px}[data-theme=matrix] .hero-description{font-size:12px}[data-theme=matrix] .project-details h3{font-size:22px}}
+@media(max-width:720px){.topbar{height:auto;flex-wrap:wrap;padding:12px 16px;gap:12px}.brand{margin:0;margin-right:auto}.theme-switch{order:2;margin:0}.topbar nav{order:3;width:100%;height:auto;margin:0;justify-content:center;padding-top:9px;border-top:1px solid #abcdd67d}[data-theme=matrix] .topbar nav{border-color:#365d42}}
