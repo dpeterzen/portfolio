@@ -1,6 +1,6 @@
 # Wallpaper artwork
 
-Created and edited with the built-in image generation tool. Dune has a sleeping cat; Keep has a sleeping dog. The stylized laptop user has uneven, tousled dark hair. The pets remain small inside the lit bedroom windows in the distant city scenes.
+Created and edited with the built-in image generation tool. Dune's indoor scene has a sleeping cat; Keep's indoor scene has a sleeping dragon. The stylized laptop user has uneven, tousled dark hair. The cat is hidden in the distant Dune city view. The latest character refinement prompts at the end supersede the earlier pet prompts.
 
 The three relocated crosses follow the user's marked screenshots: the left turret in Keep's indoor view, the smaller left antenna in Dune's indoor view, and the pole beside the satellite dish in Dune's city view. The Keep city cross retains its original position. Crosses use delicate shaded wood and upper crossbars that blend with the architecture.
 
@@ -79,3 +79,33 @@ Pet refinement prompt:
 Precise object replacement only: the curled sleeping animal on the floor just behind and to the right of the laptop user's chair, around x1393,y685, should clearly be a sleeping DOG. Keep it in the same place and similar small scale. Give it a softly curled body, a tucked muzzle, one relaxed floppy ear, closed eyes, and a gently curved tail resting beside its hind paws. No pointed cat ears. Subdued charcoal/slate coat with small warm lamp-lit accents, integrated with the blue palette and lo-fi pixel-art style. Keep the newly tousled hair, person, desk, room, all architecture and the cross only on the LEFT outdoor turret exactly as they are. Do not add a second animal or change anything else. Full original wide composition.
 
 The characters are stylized representations, not photographic portraits. Desktop icons and the Dune/Keep favicons are code-native SVG; project previews are conceptual CSS illustrations.
+
+## Latest character refinements
+
+These built-in image-tool edits supersede the earlier Dune city pet and Keep indoor dog prompts above. The Dune city window has no visible cat; the Dune indoor cat remains. The Keep indoor dog has been replaced with a small sleeping dragon. The Dune city and Keep indoor hairstyles have more uneven outlines.
+
+### Dune city window
+
+Saved asset: `dist/assets/dune-city-cross.png`
+
+The earlier image before the visible cat was used as the base. An enlarged window detail was edited and then applied to the full wallpaper.
+
+Close-up prompt:
+
+Edit this close-up screenshot. Remove the cat on the RIGHT side inside the window, leaving empty room and sill. REDRAW the seated person's hair to be clearly MESSY SHAGGY DARK HAIR, not a baseball cap. Remove the flat protruding bill on the LEFT above the forehead entirely. Give the head several fine irregular upward tufts and a jagged choppy crown, with loose strands at the back and forehead. No horizontal bill, no smooth semicircle, no hat. Use a natural asymmetrical spiky silhouette with the forehead and face distinct below the hair. Preserve the person's face direction, body, pose and laptop and all other parts of this close-up, the warm brown pixel-art style and window frame. Same composition. Do not add any pets.
+
+Full-wallpaper prompt:
+
+Image 1 is the FULL city wallpaper to edit and the output must preserve its complete original 16:9 framing. Image 2 is an approved enlarged detail of the SAME warm bedroom window, showing the correct messy hair and empty right side with no cat. Apply ONLY that approved window-interior detail back into the corresponding tiny window at about x1178–1255,y556–607 of Image 1. Specifically replace the existing cap-like head silhouette with the ragged tousled hair seen in Image 2, scaled down to the original tiny person size. Keep the room's right side EMPTY like Image 2. Do NOT enlarge the window, head, or person in Image 1. Do NOT replace the entire image with the close-up. Every building, cross, sky, moon, star, wall, and all other scene pixels outside the window must remain as in Image 1. Output one FULL wide city wallpaper with the new hair and no visible cat in that window.
+
+### Keep indoor hair and dragon
+
+Saved asset: `dist/assets/keep-office-cross.png`
+
+Hair and expression refinement prompt:
+
+Use case: precise-object-edit. Make TWO subtle character edits in this full blue Keep room wallpaper. FIRST: make the sleeping dog beside the chair (around x1396,y685) a little cuter. Keep its same size, location and curled sleeping posture, but soften the face: a slightly rounder shorter muzzle, a small dark nose, soft floppy ears, relaxed CLOSED eyes and little paws tucked under its chin. Friendly cozy sleeping puppy-like expression, not stern or sad. Keep charcoal/slate-blue fur with restrained warm light on the muzzle, matching the scene, no bright new colors. SECOND: change the laptop user's dark hair around x1335,y571 to look slightly more naturally disheveled and LESS BOWL-SHAPED: break up the smooth round cap outline with a few uneven short tufts on the crown and back, asymmetrical loose strands and a less uniform hairline. No hat, brim, helmet, bowl cut, symmetric lobes or bow. Same head size, face, pose and clothing. Preserve the entire rest of the wallpaper exactly: chair, desk, laptop, room, window, the cross on the LEFT outdoor turret, bare right turret, pixel texture, palette, scale and full original wide composition. Do not make either subject larger. Output the full wallpaper.
+
+Final dragon prompt:
+
+Use case: precise-object-edit. Replace ONLY the sleeping dog on the floor beside the chair around x1397,y685 with a SMALL CUTE SLEEPING DRAGON. Keep the same location and approximately the same compact size as the dog, no bigger. A cozy baby dragon curled into a soft resting oval, eyes peacefully CLOSED, small rounded snout, two tiny horns, small folded batlike wings flat against its back, a long slender tail tucked around its body, little paws under its chin. The folded wings and curled tail should make it clearly a dragon, but it must remain understated and sleepy, not fierce. Dark charcoal/slate-blue scales with subtle lighter blue belly and restrained warm lamplight edge, matching the existing room palette and lo-fi pixel illustration. No fire, glow, big spikes, bright colors or accessories. Preserve absolutely everything else, especially the person's newly ragged tousled hair, person and pose, desk/chair/laptop, cross on the LEFT outdoor turret, architecture, texture, original composition and full wide dimensions. Output the whole wallpaper.

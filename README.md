@@ -72,4 +72,4 @@ Serve `dist/` with a static host. Pushing to GitHub does not automatically deplo
 
 ## Content
 
-TileRecall’s description is based on its project README and remains marked in development. Both project previews are labeled as conceptual studies. The gallery study is not a reproduction of Ruthie’s paintings. The wallpaper character is a stylized representation, not a photographic likeness. Each scene includes a delicate architectural cross, tousled hair, and a sleeping companion: a cat in Dune and a dog in Keep.
+TileRecall’s description is based on its project README and remains marked in development. Both project previews are labeled as conceptual studies. The gallery study is not a reproduction of Ruthie’s paintings. The wallpaper character is a stylized representation, not a photographic likeness. Each scene includes a delicate architectural cross and tousled hair. The indoor scenes have sleeping companions: a cat in Dune and a small dragon in Keep. The cat stays out of sight in the distant Dune city view.

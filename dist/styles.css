@@ -20,10 +20,10 @@ button:disabled{opacity:.5;cursor:default}
 .wallpaper>div{position:absolute;inset:0;transition:opacity .25s}
 .wallpaper-keep{opacity:0}
 .wallpaper-scene{position:absolute;inset:0;background-size:cover;background-position:var(--scene-position,70%) top;image-rendering:pixelated}
-.dune-city{background-image:url('assets/dune-city-cross.png')}
+.dune-city{background-image:url('assets/dune-city-cross.png?v=2')}
 .keep-city{background-image:url('assets/keep-city-cross.png')}
 .dune-room{background-image:url('assets/dune-office-cross.png')}
-.keep-room{background-image:url('assets/keep-office-cross.png')}
+.keep-room{background-image:url('assets/keep-office-cross.png?v=2')}
 .wallpaper-room{opacity:0;transition:opacity 5s ease-in-out}
 [data-wallpaper-transition=manual] .wallpaper-room{transition-duration:.6s}
 [data-theme=dune][data-wallpaper-scene=room] .dune-room,[data-theme=keep][data-wallpaper-scene=room] .keep-room{opacity:1}
@@ -182,7 +182,7 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 .wallpaper-options button{padding:5px 5px 10px;border:1px solid var(--chrome-mid);background:none;text-align:left;min-width:0}
 .wallpaper-options button[aria-pressed=true]{outline:1px dotted var(--ink);outline-offset:2px;background:var(--paper)}
 .wallpaper-sample{display:block;width:100%;aspect-ratio:16/10;background-size:cover;background-position:70%;image-rendering:pixelated;border:1px solid var(--bevel-shadow)}
-.sample-dune{background-image:url('assets/dune-city-cross.png')}
+.sample-dune{background-image:url('assets/dune-city-cross.png?v=2')}
 .sample-keep{background-image:url('assets/keep-city-cross.png')}
 .wallpaper-cycle{display:flex;align-items:center;gap:7px;margin-top:15px;line-height:1.5}
 .wallpaper-cycle input{width:14px;height:14px;flex:none;padding:0;margin:0;accent-color:var(--title)}
