@@ -1,6 +1,11 @@
 # Portfolio
 
-Daniel Peterson’s portfolio. Static HTML, CSS, and JavaScript, with Vista and Matrix themes.
+Daniel Peterson’s desktop portfolio. Two environments, custom project folders, and focused project views:
+
+- **Dune** — a quiet future-western outpost, weathered folders, and field dossiers.
+- **Keep** — a moonlit castle, bound folios, and a silver-framed archive.
+
+Static HTML, CSS, and JavaScript. No build step or production dependencies.
 
 ## Run
 
@@ -10,44 +15,43 @@ cd portfolio
 python3 -m http.server 4173 --directory dist
 ```
 
-Open [localhost:4173](http://localhost:4173). Use `?theme=matrix` to open the dark theme directly.
+Open [localhost:4173](http://localhost:4173). Use `?theme=dune` or `?theme=keep` for an environment link. The theme selection is remembered on the visitor’s device.
+
+Click a project folder to zoom in. Use **Desktop** or **Escape** to return. The next-project link moves between projects; browser Back/Forward and direct links such as `?theme=keep#tilerecall` are supported. Reduced-motion preferences disable zoom and transition animations.
 
 ## Edit
 
 | File | Purpose |
 | --- | --- |
-| `dist/index.html` | Layout and copy |
-| `dist/projects.js` | Project names, descriptions, links, and status |
-| `dist/styles.css` | Vista styling and responsive layout |
-| `dist/matrix.css` | Matrix theme |
-| `dist/theme.js` | Saved theme preferences |
-| `dist/matrix-rain.js` | Background animation |
-| `dist/app.js` | Project rendering, guestbook, and navigation |
-| `dist/assets/` | Wallpaper and favicon |
+| `dist/projects.js` | Project records: folder, description, details, link, and status |
+| `dist/index.html` | Desktop, environment switch, project dialog, guestbook |
+| `dist/styles.css` | Both environments, folder objects, project studies, responsive layouts |
+| `dist/theme.js` | Theme persistence, URL preferences, environment copy |
+| `dist/app.js` | Folder rendering, zoom, project routing, guestbook, clock |
+| `dist/assets/` | Environment artwork and favicon |
+| `ARTWORK.md` | Image generation prompts and attribution of illustrative studies |
 
-Add an object to `window.PORTFOLIO_PROJECTS` to add a project. Set `pending: true` if its website is still in development. Reload the browser after editing.
+Each record in `window.PORTFOLIO_PROJECTS` creates a folder and a project view. Keep `id` unique and URL-safe; it is used for direct links. `visual` chooses the `tiles` or `paintings` folder and illustration. Extend the visual functions and CSS for a new custom project object. Set `pending: true` for a project that has not launched; its domain is shown as coming soon rather than as an active website link. Review desktop and phone layouts after adding projects.
 
 ## Check
 
-Requires Node.js:
-
 ```sh
 node --check dist/app.js
+node --check dist/projects.js
 node --check dist/theme.js
-node --check dist/matrix-rain.js
 node tests/theme.test.cjs
 ```
 
-The theme checks cover preferences, direct links, unavailable storage, reduced motion, pause/resume, hidden tabs, and animation scheduling. Check layout separately in a browser.
+The automated checks cover theme persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Browser checks for the redesign covered both environments, project opening and switching, Escape and focus restoration, phone layouts, and guestbook validation. Test notes are local to the preview browser.
 
 ## Guestbook
 
-Messages are stored only on the visitor’s device. They are not shared between visitors. A shared guestbook requires a backend.
+Messages are stored only on the visitor’s device. They are not shared between visitors. Existing notes from the previous portfolio are retained. A shared guestbook requires a backend.
 
 ## Hosting
 
-Serve `dist/` with a static host; no build step is required. Pushing to GitHub does not automatically deploy the hosted preview. Hosting credentials and configuration are excluded from this repository.
+Serve `dist/` with a static host. Pushing to GitHub does not automatically deploy the hosted site. Private hosting configuration and credentials are excluded from this repository.
 
-## Artwork
+## Content
 
-The wallpaper was generated with an early-2000s Frutiger Aero landscape prompt: blue sky, green hills, a river, a glass city, and iridescent bubbles. The miniature canvases are CSS illustrations, not reproductions of Ruthie’s paintings.
+TileRecall’s description is based on its project README; it remains marked in development. Both project illustrations are labeled as conceptual studies. The gallery artwork is not a reproduction of Ruthie’s paintings.
