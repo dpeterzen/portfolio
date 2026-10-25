@@ -9,11 +9,11 @@ class Emitter {
 class CustomEvent { constructor(type, args = {}) { this.type = type; this.detail = args.detail; } }
 function setup({query = '', saved, brokenStorage = false} = {}) {
   const document = new Emitter(); const window = new Emitter();
-  const root = {dataset:{}}; const meta = {};
+  const root = {dataset:{}}; const meta = {}; const favicon = {};
   const buttons = ['dune','keep'].map(theme => Object.assign(new Emitter(), {dataset:{themeChoice:theme}, attrs:{}, setAttribute(k,v){this.attrs[k]=v;}}));
   const copy = [{dataset:{dune:'Field station',keep:'The archives'},textContent:''}];
   let stored = saved, writes = 0;
-  Object.assign(document, {documentElement:root, querySelector:()=>meta, querySelectorAll:selector=>selector==='[data-dune]'?copy:buttons});
+  Object.assign(document, {documentElement:root, querySelector:selector=>selector==='link[rel="icon"]'?favicon:meta, querySelectorAll:selector=>selector==='[data-dune]'?copy:buttons});
   Object.assign(window,{location:{href:`https://portfolio.example/${query}`,search:query},history:{replaceState(_,__,url){window.location.href=String(url);window.location.search=new URL(url).search;}}});
   const localStorage = {getItem(){if(brokenStorage)throw Error('unavailable');return stored;},setItem(_,value){if(brokenStorage)throw Error('unavailable');stored=value;writes++;}};
   const scope=vm.createContext({document,window,localStorage,URL,URLSearchParams,CustomEvent});

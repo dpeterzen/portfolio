@@ -19,9 +19,12 @@ function setup({reduced = false, saved, brokenStorage = false} = {}) {
   const root = {dataset: {theme: 'dune'}};
   const control = emitter();
   const hint = {};
+  const status = {};
+  const arrows = [-1, 1].map(step => emitter({dataset: {sceneStep: String(step)}}));
   const motion = emitter({matches: reduced});
   const document = emitter({hidden: false, documentElement: root,
-    querySelector: selector => selector === '#wallpaper-cycle' ? control : hint});
+    querySelector: selector => selector === '#wallpaper-cycle' ? control : selector === '#wallpaper-view' ? status : hint,
+    querySelectorAll: () => arrows});
   const window = {matchMedia: () => motion,
     setTimeout(fn, delay) { const id = ++nextId; timers.set(id, {fn, at: now + delay}); return id; },
     clearTimeout(id) { timers.delete(id); }};
@@ -40,7 +43,7 @@ function setup({reduced = false, saved, brokenStorage = false} = {}) {
     now = until;
   }
   vm.runInNewContext(fs.readFileSync('dist/wallpaper.js', 'utf8'), {document, window, localStorage});
-  return {root, control, motion, document, timers, storage, advance};
+  return {root, control, motion, document, timers, storage, advance, arrows, status};
 }
 
 let app = setup();
@@ -84,4 +87,29 @@ app = setup({brokenStorage: true});
 app.advance(30000); assert.equal(app.root.dataset.wallpaperScene, 'room');
 app.control.checked = false; app.control.emit('change');
 assert.equal(app.timers.size, 0);
-console.log('PASS: 30-second sequence, theme reset, pause persistence, background tabs, reduced motion, and blocked storage.');
+
+// A click just before the old deadline must cancel it, including after rapid navigation.
+app = setup();
+app.advance(29999);
+app.arrows[1].emit('click');
+assert.equal(app.root.dataset.wallpaperScene, 'room');
+assert.equal(app.status.textContent, 'Indoor view');
+app.advance(1); assert.equal(app.root.dataset.wallpaperScene, 'room', 'the old deadline must not override a manual choice');
+app.advance(29000); assert.equal(app.root.dataset.wallpaperScene, 'room');
+app.arrows[0].emit('click');
+assert.equal(app.root.dataset.wallpaperScene, 'city');
+app.arrows[1].emit('click');
+app.advance(29999); assert.equal(app.root.dataset.wallpaperScene, 'room');
+assert.equal(app.timers.size, 1, 'rapid clicks leave exactly one deadline');
+app.advance(1); assert.equal(app.root.dataset.wallpaperScene, 'city');
+assert.equal(app.root.dataset.wallpaperTransition, 'auto');
+app.arrows[0].emit('click'); assert.equal(app.root.dataset.wallpaperScene, 'room', 'previous wraps around to the indoor scene');
+
+for (const options of [{saved: 'off'}, {reduced: true}]) {
+  app = setup(options);
+  app.arrows[1].emit('click');
+  assert.equal(app.root.dataset.wallpaperScene, 'room', 'manual navigation works without autoplay');
+  app.advance(60000); assert.equal(app.root.dataset.wallpaperScene, 'room');
+  assert.equal(app.timers.size, 0, 'manual navigation must not re-enable autoplay');
+}
+console.log('PASS: timed sequence, manual navigation and deadline reset, rapid clicks, theme reset, pause persistence, background tabs, reduced motion, and blocked storage.');

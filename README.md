@@ -27,9 +27,9 @@ Open [localhost:4173](http://localhost:4173). Use `?theme=dune` or `?theme=keep`
 - Project folders contain `readme.txt` for information and `preview.img` for an illustrative study.
 - Escape dismisses Start or closes the active window. Direct project links such as `?theme=keep#tilerecall` and browser Back/Forward are supported.
 
-Wallpapers alternate every 30 seconds with a five-second crossfade. Switching themes restarts from the city view. Turn off cycling in Display Properties to hold the current scene; the preference is saved on this device. Playback pauses in background tabs.
+Wallpapers alternate every 30 seconds with a five-second crossfade. The chevrons beside the theme switch move between city and indoor views with a short fade; every manual change cancels the previous deadline and starts a fresh 30-second countdown. Manual navigation also works with cycling paused or reduced motion enabled. Switching themes restarts from the city view. Turn off cycling in Display Properties to hold the current scene; the preference is saved on this device. Playback pauses in background tabs.
 
-The welcome window starts minimized on phones so the desktop folders stay visible. Phone windows fit the workspace. Reduced-motion preferences keep the city wallpaper still and disable opening and theme transitions.
+The welcome window starts minimized on phones so the desktop folders stay visible. Phone windows fit the workspace. Reduced-motion preferences disable automatic wallpaper changes and animation; the scene arrows remain available.
 
 ## Edit
 
@@ -38,11 +38,11 @@ The welcome window starts minimized on phones so the desktop folders stay visibl
 | `dist/projects.js` | Project records and folder metadata |
 | `dist/index.html` | Desktop shell, icon sprites, Start menu, taskbar |
 | `dist/styles.css` | Both palettes, retro chrome, project illustrations, responsive layout |
-| `dist/theme.js` | Saved theme and URL preferences |
-| `dist/wallpaper.js` | Wallpaper sequence, timer, pause preference, reduced motion |
+| `dist/theme.js` | Saved theme, URL preferences, and matching favicon |
+| `dist/wallpaper.js` | Wallpaper navigation, timer reset, pause preference, reduced motion |
 | `dist/window-state.js` | Independent window state and focus ordering |
 | `dist/app.js` | Window manager, drag, file views, guestbook, clock, routing |
-| `dist/assets/` | City and indoor wallpapers, plus favicon |
+| `dist/assets/` | City and indoor wallpapers, plus Dune/Keep favicons |
 | `ARTWORK.md` | Built-in image-generation prompts and asset paths |
 
 Add a record to `window.PORTFOLIO_PROJECTS` to create a desktop folder, Start entry, and project window. Keep `id` unique and URL-safe for direct links. `visual` selects the `tiles` or `paintings` illustration. Add another case to `projectStudy()` and corresponding CSS for a new project visual. Set `pending: true` until the project’s website launches. Check desktop and phone layouts when extending the collection.
@@ -60,7 +60,7 @@ node tests/windows.test.cjs
 node tests/wallpaper.test.cjs
 ```
 
-Theme tests cover persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Window tests cover focus stacking, taskbar behavior, minimize/maximize restoration, closed-window behavior, and showing/restoring desktop groups. Wallpaper tests cover the 30-second sequence, theme changes, pause persistence, background tabs, and reduced motion. Validate pointer interactions and responsive layouts separately in a browser.
+Theme tests cover persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Window tests cover focus stacking, taskbar behavior, minimize/maximize restoration, closed-window behavior, and showing/restoring desktop groups. Wallpaper tests cover the 30-second sequence, manual deadline reset, rapid navigation, theme changes, pause persistence, background tabs, and reduced motion. Validate pointer interactions and responsive layouts separately in a browser.
 
 ## Guestbook
 
@@ -72,4 +72,4 @@ Serve `dist/` with a static host. Pushing to GitHub does not automatically deplo
 
 ## Content
 
-TileRecall’s description is based on its project README and remains marked in development. Both project previews are labeled as conceptual studies. The gallery study is not a reproduction of Ruthie’s paintings. The wallpaper character is a stylized person seen from behind, not a photographic likeness.
+TileRecall’s description is based on its project README and remains marked in development. Both project previews are labeled as conceptual studies. The gallery study is not a reproduction of Ruthie’s paintings. The wallpaper character is a stylized representation, not a photographic likeness. Each scene includes a small architectural cross at its highest visible tower or rooftop tip.

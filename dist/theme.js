@@ -8,9 +8,14 @@
   try { saved = localStorage.getItem(key); } catch { /* Storage is optional. */ }
   const initial = allowed(query) ? query : allowed(saved) ? saved : 'dune';
   document.documentElement.dataset.theme = initial;
+  function setFavicon(theme) {
+    document.querySelector('link[rel="icon"]').href = theme === 'keep' ? 'assets/favicon-keep.svg' : 'assets/favicon.svg';
+  }
+  setFavicon(initial);
   function setTheme(theme, persist = false) {
     if (!allowed(theme)) return;
     document.documentElement.dataset.theme = theme;
+    setFavicon(theme);
     document.querySelector('meta[name="theme-color"]').content = theme === 'keep' ? '#202c3d' : '#514637';
     document.querySelectorAll('[data-theme-choice]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme)));
     document.querySelectorAll('[data-dune]').forEach(element => { element.textContent = element.dataset[theme]; });
