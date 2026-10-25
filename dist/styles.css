@@ -18,8 +18,8 @@ button:disabled{opacity:.5;cursor:default}
 .pixel-icon{width:24px;height:24px;display:block;flex-shrink:0;shape-rendering:crispEdges;image-rendering:pixelated}
 .wallpaper{position:fixed;inset:0;background:var(--wall);z-index:-1}
 .wallpaper>div{position:absolute;inset:0;background-size:cover;background-position:70% center;image-rendering:pixelated;transition:opacity .25s}
-.wallpaper-dune{background-image:url('assets/dune-office-wide.png')}
-.wallpaper-keep{background-image:url('assets/keep-office-wide.png');opacity:0}
+.wallpaper-dune{background-image:url('assets/dune-city-window.png')}
+.wallpaper .wallpaper-keep{background-image:url('assets/keep-city-window.png');background-position:90% center;opacity:0}
 .desktop-topbar{height:34px;position:fixed;inset:0 0 auto;z-index:10000;display:flex;align-items:center;justify-content:space-between;padding:0 13px;color:var(--desktop-ink);background:color-mix(in srgb,var(--wall) 88%,transparent);border-bottom:1px solid #ffffff15;font:12px var(--pixel);letter-spacing:.3px}
 .os-name{display:flex;gap:10px;align-items:center}
 .os-name svg{width:12px;height:12px;shape-rendering:crispEdges}
@@ -168,8 +168,8 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 .wallpaper-options button{padding:5px 5px 10px;border:1px solid var(--chrome-mid);background:none;text-align:left;min-width:0}
 .wallpaper-options button[aria-pressed=true]{outline:1px dotted var(--ink);outline-offset:2px;background:var(--paper)}
 .wallpaper-sample{display:block;width:100%;aspect-ratio:16/10;background-size:cover;background-position:70%;image-rendering:pixelated;border:1px solid var(--bevel-shadow)}
-.sample-dune{background-image:url('assets/dune-office-wide.png')}
-.sample-keep{background-image:url('assets/keep-office-wide.png')}
+.sample-dune{background-image:url('assets/dune-city-window.png')}
+.sample-keep{background-image:url('assets/keep-city-window.png')}
 .wallpaper-options strong{font:15px var(--pixel);display:block;margin:10px 4px 5px}
 .wallpaper-options small{display:block;font-size:9px;line-height:1.5;margin:0 4px;color:var(--muted)}
 .settings-hint{font-size:10px;color:var(--muted);margin:22px 0 17px}
@@ -238,7 +238,7 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 .icon-art,.icon-art>.pixel-icon{width:49px;height:49px}
 .icon-art{height:51px}
 #workspace{top:33px;bottom:48px}
-.wallpaper>div{background-position:80% center}
+.wallpaper>div{background-position:85% center}
 .desktop-caption{bottom:20px;right:16px;font-size:9px;gap:4px;opacity:.65}
 .desktop-caption small{font-size:6px}
 .app-window{left:6px!important;top:8px!important;width:calc(100% - 12px)!important;height:calc(100% - 16px)!important;min-width:0;min-height:0;resize:none;max-width:none;max-height:none}

@@ -1,9 +1,9 @@
 # Portfolio
 
-Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art office themes. Both use a distant view, a small laptop-workstation figure, and a restrained tonal palette:
+Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art city themes. Both are exterior views with a tiny laptop user visible through a cozy bedroom window and a restrained tonal palette:
 
-- **Dune** — a laptop workspace in a desert outpost, in warm sand and brown tones.
-- **Keep** — a laptop workspace in a castle study, in slate and midnight blue.
+- **Dune** — a quiet desert city with an occupied bedroom window, in warm sand and brown tones.
+- **Keep** — a midnight castle city with an occupied bedroom window, in slate and blue.
 
 Static HTML, CSS, and JavaScript. No build step or production dependencies.
 
@@ -39,7 +39,7 @@ The welcome window starts minimized on phones so the desktop folders stay visibl
 | `dist/theme.js` | Saved theme and URL preferences |
 | `dist/window-state.js` | Independent window state and focus ordering |
 | `dist/app.js` | Window manager, drag, file views, guestbook, clock, routing |
-| `dist/assets/` | Office wallpapers and favicon |
+| `dist/assets/` | City wallpapers and favicon |
 | `ARTWORK.md` | Built-in image-generation prompts and asset paths |
 
 Add a record to `window.PORTFOLIO_PROJECTS` to create a desktop folder, Start entry, and project window. Keep `id` unique and URL-safe for direct links. `visual` selects the `tiles` or `paintings` illustration. Add another case to `projectStudy()` and corresponding CSS for a new project visual. Set `pending: true` until the project’s website launches. Check desktop and phone layouts when extending the collection.
