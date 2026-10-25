@@ -1,35 +1,27 @@
 <!doctype html>
 <html lang="en" data-theme="dune">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#d3c4aa">
-  <meta name="description" content="Daniel Peterson’s independent projects. A desktop between the desert and the keep.">
-  <title>Portfolio — Daniel Peterson</title>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <script src="theme.js"></script>
-  <link rel="stylesheet" href="styles.css">
-  <script src="projects.js" defer></script>
-  <script src="app.js" defer></script>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#514637"><meta name="description" content="Daniel Peterson’s projects, on a retro desktop. Choose a desert outpost or a midnight castle workspace.">
+  <title>Portfolio — Daniel Peterson</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <script src="theme.js"></script><link rel="stylesheet" href="styles.css">
+  <script src="projects.js" defer></script><script src="window-state.js" defer></script><script src="app.js" defer></script>
 </head>
 <body>
-  <div class="scenery" aria-hidden="true"><div class="landscape landscape-dune"></div><div class="landscape landscape-keep"></div><div class="atmosphere"></div><div class="grain"></div></div>
-  <div class="desktop" id="desktop">
-    <header class="system-bar">
-      <a class="signature" href="#" aria-label="Portfolio desktop"><span class="signature-mark" aria-hidden="true">dp.</span><span>Daniel Peterson<span class="signature-sub">Personal archive</span></span></a>
-      <div class="system-location" aria-hidden="true"><span class="status-light"></span><span data-dune="Dune / field station" data-keep="Keep / the archives">Dune / field station</span></div>
-      <div class="theme-switch" role="group" aria-label="Choose an environment"><button type="button" data-theme-choice="dune" aria-pressed="true"><span class="theme-swatch dune-swatch" aria-hidden="true"></span>Dune</button><button type="button" data-theme-choice="keep" aria-pressed="false"><span class="theme-swatch keep-swatch" aria-hidden="true"></span>Keep</button></div>
-    </header>
-    <main class="desktop-main">
-      <section class="desktop-intro" aria-labelledby="desktop-title"><span class="eyebrow" data-dune="Independent works / 01—02" data-keep="A collection of independent works">Independent works / 01—02</span><h1 id="desktop-title"><span data-dune="Somewhere" data-keep="Within">Somewhere</span><br><em data-dune="between ideas." data-keep="the keep.">between ideas.</em></h1><p>Websites, experiments, and things in progress.</p></section>
-      <section class="project-field" aria-label="Project folders" id="project-field"></section>
-      <button class="journal-shortcut" type="button" data-open="guestbook"><span class="journal-object" aria-hidden="true"><i></i><b>✎</b></span><span>Guestbook<small>Leave a trace</small></span></button>
-      <div class="landmark-caption" aria-hidden="true"><span class="landmark-line"></span><span data-dune="No rush. Explore a folder." data-keep="Every folio holds a project.">No rush. Explore a folder.</span><span class="landmark-number" data-dune="35° / OUTPOST" data-keep="NIGHTFALL / ARCHIVE">35° / OUTPOST</span></div>
-      <noscript><div class="noscript-message">Enable JavaScript to explore the desktop. <a href="https://ruthiepaintings.com">Visit Ruthie Paintings</a> or <a href="https://github.com/dpeterzen/portfolio">view the source</a>.</div></noscript>
-    </main>
-    <footer class="desktop-footer"><span class="folder-hint"><span class="crosshair" aria-hidden="true">⌖</span> Select a folder to open</span><nav class="desktop-dock" aria-label="Desktop shortcuts"><button type="button" id="desktop-button" aria-label="Return to desktop"><span aria-hidden="true">▦</span> Desktop</button><span class="dock-rule"></span><button type="button" data-open="guestbook">Guestbook</button><a href="https://github.com/dpeterzen/portfolio" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span><span class="sr-only"> on GitHub, opens in a new tab</span></a></nav><time id="clock"></time></footer>
-  </div>
-  <dialog id="project-dialog" class="project-dialog" aria-labelledby="project-title"><div class="dossier"><header class="dossier-toolbar"><button type="button" class="back-button" id="close-project"><span aria-hidden="true">←</span> Desktop</button><span id="dossier-path" class="dossier-path"></span><span class="dossier-index" id="dossier-index"></span></header><div id="project-content"></div><footer class="dossier-footer"><span data-dune="End of file" data-keep="End of folio">End of file</span><button type="button" id="next-project">Next project <span aria-hidden="true">→</span></button></footer></div></dialog>
-  <dialog id="guestbook-dialog" class="guestbook-dialog" aria-labelledby="guestbook-title"><div class="guestbook-sheet"><header class="dossier-toolbar"><span class="eyebrow">Visitor log</span><button type="button" class="close-button" id="close-guestbook" aria-label="Close guestbook">×</button></header><h2 id="guestbook-title">Guestbook</h2><p class="guestbook-disclaimer">A note for this visit. Stored on this device only.</p><div id="guestbook-notes" class="guestbook-notes"></div><form id="note-form"><label for="note-name">Name</label><input id="note-name" name="name" maxlength="32" autocomplete="nickname" required placeholder="Your name"><label for="note-message">Message</label><textarea id="note-message" name="message" maxlength="280" rows="3" required placeholder="Leave a message"></textarea><div class="form-bottom"><span id="character-count">0 / 280</span><button type="submit" class="action-link">Save note <span aria-hidden="true">↗</span></button></div><p id="form-error" role="alert" hidden></p><p id="note-status" role="status"></p></form></div></dialog>
-</body>
-</html>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-folder" viewBox="0 0 32 32"><path d="M2 7h12l3 4h13v17H2Z" fill="var(--icon-edge)"/><path d="M3 8h10l3 4h13v14H3Z" fill="var(--folder-dark)"/><path d="M2 13h28v15H2Z" fill="var(--icon-edge)"/><path d="M3 14h26v12H3Z" fill="var(--folder)"/><path d="M3 14h26v2H3Z" fill="var(--folder-light)"/><path d="M4 26h24v1H4Z" fill="var(--folder-dark)"/></symbol>
+    <symbol id="i-paper" viewBox="0 0 32 32"><path d="M7 2h14l6 6v22H7Z" fill="var(--icon-edge)"/><path d="M8 3h12v6h6v20H8Z" fill="var(--paper)"/><path d="M21 4v4h4Z" fill="var(--bevel-light)"/><path d="M11 13h12v2H11Zm0 5h10v2H11Zm0 5h12v2H11Z" fill="var(--folder-dark)"/></symbol>
+    <symbol id="i-computer" viewBox="0 0 32 32"><path d="M3 2h26v20H3Zm11 20h4v4h9v4H5v-4h9Z" fill="var(--icon-edge)"/><path d="M4 3h24v18H4Z" fill="var(--chrome)"/><path d="M6 5h20v13H6Z" fill="var(--screen)"/><path d="M8 8h5v2H8Zm4 2h3v2h-3Zm-4 2h5v2H8Zm9 2h6v1h-6Z" fill="var(--screen-ink)"/><path d="M23 19h3v1h-3ZM7 27h18v2H7Z" fill="var(--folder-light)"/></symbol>
+    <symbol id="i-notebook" viewBox="0 0 32 32"><path d="M5 3h23v27H5Z" fill="var(--icon-edge)"/><path d="M6 4h21v24H6Z" fill="var(--folder)"/><path d="M9 4h2v24H9Z" fill="var(--folder-dark)"/><path d="M14 8h9v8h-9Z" fill="var(--paper)"/><path d="M15 10h7v1h-7Zm0 3h5v1h-5Z" fill="var(--folder-dark)"/><path d="M7 28h20v1H7Z" fill="var(--paper)"/></symbol>
+    <symbol id="i-display" viewBox="0 0 32 32"><path d="M3 4h26v21H3Zm9 21h8v3h5v2H7v-2h5Z" fill="var(--icon-edge)"/><path d="M4 5h24v18H4Z" fill="var(--chrome)"/><path d="M6 7h20v13H6Z" fill="var(--screen)"/><path d="M6 16h5v-3h4v2h5v-4h6v9H6Z" fill="var(--folder-dark)"/><path d="M20 8h4v3h-4Z" fill="var(--folder-light)"/></symbol>
+    <symbol id="i-source" viewBox="0 0 32 32"><path d="M5 3h22v26H5Z" fill="var(--icon-edge)"/><path d="M6 4h20v24H6Z" fill="var(--screen)"/><path d="M9 12h3v-2h2v3h-3v3h3v3h-2v-2H9Zm14 0h-3v-2h-2v3h3v3h-3v3h2v-2h3Z" fill="var(--screen-ink)"/><path d="M15 8h2v14h-2Z" fill="var(--folder-dark)"/></symbol>
+    <symbol id="i-start" viewBox="0 0 16 16"><path d="M1 1h6v6H1Zm8 0h6v6H9ZM1 9h6v6H1Zm8 0h6v6H9Z" fill="currentColor"/></symbol>
+    <symbol id="i-image" viewBox="0 0 32 32"><path d="M3 4h26v24H3Z" fill="var(--icon-edge)"/><path d="M4 5h24v22H4Z" fill="var(--paper)"/><path d="M6 7h20v17H6Z" fill="var(--folder-dark)"/><path d="M6 19h4v-4h5v3h5v-5h6v11H6Z" fill="var(--folder)"/><path d="M19 9h4v3h-4Z" fill="var(--folder-light)"/></symbol>
+  </defs></svg>
+  <div class="wallpaper" aria-hidden="true"><div class="wallpaper-dune"></div><div class="wallpaper-keep"></div></div>
+  <header class="desktop-topbar"><span class="os-name"><svg aria-hidden="true"><use href="#i-start"/></svg><span data-dune="DUNE/OS" data-keep="KEEP/OS">DUNE/OS</span><span class="topbar-divider">/</span><span class="owner-name">Daniel Peterson</span></span><div class="theme-switch" role="group" aria-label="Desktop theme"><button type="button" data-theme-choice="dune" aria-pressed="true">Dune</button><button type="button" data-theme-choice="keep" aria-pressed="false">Keep</button></div></header>
+  <main id="workspace" aria-label="Portfolio desktop"><h1 class="sr-only">Daniel Peterson’s portfolio desktop</h1><div class="desktop-icons" id="desktop-icons" aria-label="Desktop folders and shortcuts"></div><div class="desktop-caption" aria-hidden="true"><span data-dune="DUNE/OS — NIGHT SHIFT" data-keep="KEEP/OS — NIGHT SHIFT">DUNE/OS — NIGHT SHIFT</span><small>personal computer / independent projects</small></div><div id="windows"></div><noscript><p class="noscript-message">Enable JavaScript to open the desktop folders. <a href="https://ruthiepaintings.com">Ruthie Paintings</a> · <a href="https://github.com/dpeterzen/portfolio">Source</a></p></noscript></main>
+  <nav class="start-menu" id="start-menu" aria-label="Start menu" hidden><div class="start-banner"><span>portfolio</span><small>Daniel Peterson</small></div><div id="start-items"></div><a class="start-item" href="https://github.com/dpeterzen/portfolio" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-source"/></svg>View source <span aria-hidden="true">↗</span></a><div class="start-foot">2 projects · built independently</div></nav>
+  <footer class="taskbar"><button class="start-button raised" id="start-button" type="button" aria-expanded="false" aria-controls="start-menu"><svg aria-hidden="true"><use href="#i-start"/></svg>Start</button><span class="taskbar-grip" aria-hidden="true"></span><nav id="task-buttons" class="task-buttons" aria-label="Open windows"></nav><div class="system-tray"><span class="tray-light" title="Desktop ready" aria-hidden="true"></span><time id="clock"></time><button id="show-desktop" type="button" title="Show desktop" aria-label="Show desktop">▯</button></div></footer>
+  <div class="screen-reader-status sr-only" id="desktop-status" role="status"></div>
+</body></html>

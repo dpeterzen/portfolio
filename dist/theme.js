@@ -11,7 +11,7 @@
   function setTheme(theme, persist = false) {
     if (!allowed(theme)) return;
     document.documentElement.dataset.theme = theme;
-    document.querySelector('meta[name="theme-color"]').content = theme === 'keep' ? '#171e23' : '#d3c4aa';
+    document.querySelector('meta[name="theme-color"]').content = theme === 'keep' ? '#202c3d' : '#514637';
     document.querySelectorAll('[data-theme-choice]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme)));
     document.querySelectorAll('[data-dune]').forEach(element => { element.textContent = element.dataset[theme]; });
     if (persist) {

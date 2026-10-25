@@ -25,7 +25,7 @@ function setup({query = '', saved, brokenStorage = false} = {}) {
 let app=setup();
 assert.equal(app.root.dataset.theme,'dune'); assert.equal(app.writes,0); assert.equal(app.copy[0].textContent,'Field station');
 app.buttons[1].dispatchEvent({type:'click'});
-assert.equal(app.root.dataset.theme,'keep'); assert.equal(app.stored,'keep'); assert.equal(app.buttons[1].attrs['aria-pressed'],'true'); assert.equal(app.buttons[0].attrs['aria-pressed'],'false'); assert.equal(app.meta.content,'#171e23'); assert.equal(app.copy[0].textContent,'The archives');
+assert.equal(app.root.dataset.theme,'keep'); assert.equal(app.stored,'keep'); assert.equal(app.buttons[1].attrs['aria-pressed'],'true'); assert.equal(app.buttons[0].attrs['aria-pressed'],'false'); assert.equal(app.meta.content,'#202c3d'); assert.equal(app.copy[0].textContent,'The archives');
 app.buttons[0].dispatchEvent({type:'click'}); assert.equal(app.stored,'dune'); assert.equal(app.copy[0].textContent,'Field station');
 app=setup({saved:'keep'}); assert.equal(app.root.dataset.theme,'keep'); assert.equal(app.writes,0);
 app=setup({query:'?theme=keep',saved:'dune'}); assert.equal(app.root.dataset.theme,'keep'); assert.equal(app.stored,'dune');

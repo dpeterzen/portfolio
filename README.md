@@ -1,9 +1,9 @@
 # Portfolio
 
-Daniel Peterson’s desktop portfolio. Two environments, custom project folders, and focused project views:
+Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art office themes:
 
-- **Dune** — a quiet future-western outpost, weathered folders, and field dossiers.
-- **Keep** — a moonlit castle, bound folios, and a silver-framed archive.
+- **Dune** — a laptop workspace in a desert outpost, in warm sand and brown tones.
+- **Keep** — a laptop workspace in a castle study, in slate and midnight blue.
 
 Static HTML, CSS, and JavaScript. No build step or production dependencies.
 
@@ -15,38 +15,51 @@ cd portfolio
 python3 -m http.server 4173 --directory dist
 ```
 
-Open [localhost:4173](http://localhost:4173). Use `?theme=dune` or `?theme=keep` for an environment link. The theme selection is remembered on the visitor’s device.
+Open [localhost:4173](http://localhost:4173). Use `?theme=dune` or `?theme=keep` for an environment link; theme selection is remembered on the visitor’s device.
 
-Click a project folder to zoom in. Use **Desktop** or **Escape** to return. The next-project link moves between projects; browser Back/Forward and direct links such as `?theme=keep#tilerecall` are supported. Reduced-motion preferences disable zoom and transition animations.
+## Desktop controls
+
+- Double-click a desktop folder to open it; on touchscreens, tap once. Keyboard users can focus an icon and press Enter or Space.
+- Drag a window by its title bar. Use the bottom-right resize handle on desktop.
+- Minimize, maximize/restore, and close controls work independently for every window. Double-clicking a title bar also toggles maximize.
+- Taskbar buttons restore or minimize their window. The far-right taskbar control shows the desktop and restores the prior visible windows.
+- The Start menu opens projects, the guestbook, and Display Properties. Theme choices are also available in the top bar.
+- Project folders contain `readme.txt` for information and `preview.img` for an illustrative study.
+- Escape dismisses Start or closes the active window. Direct project links such as `?theme=keep#tilerecall` and browser Back/Forward are supported.
+
+The welcome window starts minimized on phones so the desktop folders stay visible. Phone windows fit the workspace. Reduced-motion preferences disable opening and theme transitions.
 
 ## Edit
 
 | File | Purpose |
 | --- | --- |
-| `dist/projects.js` | Project records: folder, description, details, link, and status |
-| `dist/index.html` | Desktop, environment switch, project dialog, guestbook |
-| `dist/styles.css` | Both environments, folder objects, project studies, responsive layouts |
-| `dist/theme.js` | Theme persistence, URL preferences, environment copy |
-| `dist/app.js` | Folder rendering, zoom, project routing, guestbook, clock |
-| `dist/assets/` | Environment artwork and favicon |
-| `ARTWORK.md` | Image generation prompts and attribution of illustrative studies |
+| `dist/projects.js` | Project records and folder metadata |
+| `dist/index.html` | Desktop shell, icon sprites, Start menu, taskbar |
+| `dist/styles.css` | Both palettes, retro chrome, project illustrations, responsive layout |
+| `dist/theme.js` | Saved theme and URL preferences |
+| `dist/window-state.js` | Independent window state and focus ordering |
+| `dist/app.js` | Window manager, drag, file views, guestbook, clock, routing |
+| `dist/assets/` | Office wallpapers and favicon |
+| `ARTWORK.md` | Built-in image-generation prompts and asset paths |
 
-Each record in `window.PORTFOLIO_PROJECTS` creates a folder and a project view. Keep `id` unique and URL-safe; it is used for direct links. `visual` chooses the `tiles` or `paintings` folder and illustration. Extend the visual functions and CSS for a new custom project object. Set `pending: true` for a project that has not launched; its domain is shown as coming soon rather than as an active website link. Review desktop and phone layouts after adding projects.
+Add a record to `window.PORTFOLIO_PROJECTS` to create a desktop folder, Start entry, and project window. Keep `id` unique and URL-safe for direct links. `visual` selects the `tiles` or `paintings` illustration. Add another case to `projectStudy()` and corresponding CSS for a new project visual. Set `pending: true` until the project’s website launches. Check desktop and phone layouts when extending the collection.
 
 ## Check
 
 ```sh
 node --check dist/app.js
-node --check dist/projects.js
+node --check dist/window-state.js
 node --check dist/theme.js
+node --check dist/projects.js
 node tests/theme.test.cjs
+node tests/windows.test.cjs
 ```
 
-The automated checks cover theme persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Browser checks for the redesign covered both environments, project opening and switching, Escape and focus restoration, phone layouts, and guestbook validation. Test notes are local to the preview browser.
+Theme tests cover persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Window tests cover focus stacking, taskbar behavior, minimize/maximize restoration, closed-window behavior, and showing/restoring desktop groups. Validate pointer interactions and responsive layouts separately in a browser.
 
 ## Guestbook
 
-Messages are stored only on the visitor’s device. They are not shared between visitors. Existing notes from the previous portfolio are retained. A shared guestbook requires a backend.
+Messages are stored only on the visitor’s device, and are not shared between visitors. Existing notes from earlier portfolio versions are retained. A shared guestbook requires a backend.
 
 ## Hosting
 
@@ -54,4 +67,4 @@ Serve `dist/` with a static host. Pushing to GitHub does not automatically deplo
 
 ## Content
 
-TileRecall’s description is based on its project README; it remains marked in development. Both project illustrations are labeled as conceptual studies. The gallery artwork is not a reproduction of Ruthie’s paintings.
+TileRecall’s description is based on its project README and remains marked in development. Both project previews are labeled as conceptual studies. The gallery study is not a reproduction of Ruthie’s paintings. The wallpaper character is a stylized person seen from behind, not a photographic likeness.
