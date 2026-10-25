@@ -1,6 +1,6 @@
 # Portfolio
 
-Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art office themes:
+Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art office themes. Both use a distant view, a small laptop-workstation figure, and a restrained tonal palette:
 
 - **Dune** — a laptop workspace in a desert outpost, in warm sand and brown tones.
 - **Keep** — a laptop workspace in a castle study, in slate and midnight blue.
