@@ -1,6 +1,6 @@
 # Portfolio
 
-Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art city themes. Both are exterior views with a tiny laptop user visible through a cozy bedroom window and a restrained tonal palette:
+Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art city themes. Each begins with a city view and a tiny laptop user tucked into a distant bedroom window, then alternates with its original indoor scene:
 
 - **Dune** — a quiet desert city with an occupied bedroom window, in warm sand and brown tones.
 - **Keep** — a midnight castle city with an occupied bedroom window, in slate and blue.
@@ -27,7 +27,9 @@ Open [localhost:4173](http://localhost:4173). Use `?theme=dune` or `?theme=keep`
 - Project folders contain `readme.txt` for information and `preview.img` for an illustrative study.
 - Escape dismisses Start or closes the active window. Direct project links such as `?theme=keep#tilerecall` and browser Back/Forward are supported.
 
-The welcome window starts minimized on phones so the desktop folders stay visible. Phone windows fit the workspace. Reduced-motion preferences disable opening and theme transitions.
+Wallpapers alternate every 30 seconds with a five-second crossfade. Switching themes restarts from the city view. Turn off cycling in Display Properties to hold the current scene; the preference is saved on this device. Playback pauses in background tabs.
+
+The welcome window starts minimized on phones so the desktop folders stay visible. Phone windows fit the workspace. Reduced-motion preferences keep the city wallpaper still and disable opening and theme transitions.
 
 ## Edit
 
@@ -37,9 +39,10 @@ The welcome window starts minimized on phones so the desktop folders stay visibl
 | `dist/index.html` | Desktop shell, icon sprites, Start menu, taskbar |
 | `dist/styles.css` | Both palettes, retro chrome, project illustrations, responsive layout |
 | `dist/theme.js` | Saved theme and URL preferences |
+| `dist/wallpaper.js` | Wallpaper sequence, timer, pause preference, reduced motion |
 | `dist/window-state.js` | Independent window state and focus ordering |
 | `dist/app.js` | Window manager, drag, file views, guestbook, clock, routing |
-| `dist/assets/` | City wallpapers and favicon |
+| `dist/assets/` | City and indoor wallpapers, plus favicon |
 | `ARTWORK.md` | Built-in image-generation prompts and asset paths |
 
 Add a record to `window.PORTFOLIO_PROJECTS` to create a desktop folder, Start entry, and project window. Keep `id` unique and URL-safe for direct links. `visual` selects the `tiles` or `paintings` illustration. Add another case to `projectStudy()` and corresponding CSS for a new project visual. Set `pending: true` until the project’s website launches. Check desktop and phone layouts when extending the collection.
@@ -51,11 +54,13 @@ node --check dist/app.js
 node --check dist/window-state.js
 node --check dist/theme.js
 node --check dist/projects.js
+node --check dist/wallpaper.js
 node tests/theme.test.cjs
 node tests/windows.test.cjs
+node tests/wallpaper.test.cjs
 ```
 
-Theme tests cover persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Window tests cover focus stacking, taskbar behavior, minimize/maximize restoration, closed-window behavior, and showing/restoring desktop groups. Validate pointer interactions and responsive layouts separately in a browser.
+Theme tests cover persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Window tests cover focus stacking, taskbar behavior, minimize/maximize restoration, closed-window behavior, and showing/restoring desktop groups. Wallpaper tests cover the 30-second sequence, theme changes, pause persistence, background tabs, and reduced motion. Validate pointer interactions and responsive layouts separately in a browser.
 
 ## Guestbook
 
