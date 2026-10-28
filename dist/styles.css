@@ -24,8 +24,8 @@ button:disabled{opacity:.5;cursor:default}
 .keep-city{background-image:url('assets/keep-city-cross.png')}
 .dune-room{background-image:url('assets/dune-office-cross.png')}
 .keep-room{background-image:url('assets/keep-office-cross.png?v=2')}
-.wallpaper-room{opacity:0;transition:opacity 5s ease-in-out}
-[data-wallpaper-transition=manual] .wallpaper-room{transition-duration:.6s}
+.wallpaper-room{opacity:0;transition:opacity 2.4s cubic-bezier(.4,0,.2,1)}
+[data-wallpaper-transition=manual] .wallpaper-room{transition-duration:.76s;transition-timing-function:cubic-bezier(.22,1,.36,1)}
 [data-wallpaper-scene=room] .wallpaper-room{opacity:1}
 .desktop-topbar{height:34px;position:fixed;inset:0 0 auto;z-index:10000;display:flex;align-items:center;justify-content:space-between;padding:0 13px;color:var(--desktop-ink);background:color-mix(in srgb,var(--wall) 88%,transparent);border-bottom:1px solid #ffffff15;font:12px var(--pixel);letter-spacing:.3px}
 .os-name{display:flex;gap:10px;align-items:center}
@@ -214,7 +214,6 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 .start-item{width:100%;display:flex;gap:12px;align-items:center;text-align:left;padding:10px 13px;background:none;border:0;color:var(--ink);font:12px var(--ui);text-decoration:none}
 .start-item .pixel-icon,.start-item>svg{width:27px;height:27px;shape-rendering:crispEdges}
 .start-item:hover,.start-item:focus-visible{background:var(--selection);color:var(--selection-ink)}
-.start-foot{border-top:1px solid var(--bevel-shadow);box-shadow:inset 0 1px var(--bevel-light);padding:11px 13px 7px;margin-top:5px;color:var(--muted);font:9px var(--mono)}
 
 [data-theme=keep]{color-scheme:dark;--chrome:#485567;--chrome-mid:#3c4859;--bevel-light:#8190a2;--bevel-shadow:#263244;--bevel-dark:#111c2b;--ink:#d0d9e2;--muted:#9caebe;--paper:#2b3748;--folder:#9baec0;--folder-light:#c8d3da;--folder-dark:#6b8199;--icon-edge:#182536;--screen:#1b2a3b;--screen-ink:#b9cad5;--title:#283b54;--title-end:#60758d;--title-ink:#e0e8ed;--desktop-ink:#bdcbd5;--selection:#607a96;--selection-ink:#f0f4f7;--wall:#202c3d}
 
@@ -589,3 +588,14 @@ html[data-motion=off] .lamp-hint{transition:none}
 @keyframes brand-blue-signal{0%,100%{fill:#2e62ef}20%{fill:#3f5bc7}42%{fill:#5f7fe0}60%{fill:#8fb0ff}78%{fill:#6d8ff4}}
 
 @media(max-width:639px){[data-theme=coda] #desk-lamp{min-width:52px;min-height:52px;border-color:#f4d295b3;box-shadow:0 0 0 3px #171e1860,0 0 14px #ffdb9b25}}
+
+/* A quiet CRT shutter and a short segmented boot indicator. */
+.reboot-screen{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;outline:0;color:var(--desktop-ink);font:12px/1.5 var(--mono)}
+.reboot-screen::before{content:'';position:absolute;inset:0;background:#0b100f;animation:reboot-shutter .32s cubic-bezier(.22,1,.36,1) both}
+.reboot-console{position:relative;display:grid;justify-items:center;gap:18px;animation:reboot-console .25s .28s ease-out both}
+.reboot-console img{image-rendering:pixelated;opacity:.8}
+.reboot-meter{display:flex;gap:3px}
+.reboot-meter i{width:8px;height:4px;background:currentColor;opacity:.12;animation:reboot-segment .12s calc(.4s + var(--segment)*.09s) ease-out forwards}
+@keyframes reboot-shutter{from{transform:scaleY(.004);opacity:.5}to{transform:scaleY(1);opacity:1}}
+@keyframes reboot-console{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
+@keyframes reboot-segment{to{opacity:.75}}

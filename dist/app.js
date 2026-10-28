@@ -57,7 +57,7 @@ function launchIcon(entry) {
   button.addEventListener('dblclick',()=>openWindow(entry.id,true));
   icons.append(button); launchers.set(entry.id,button);
   }
-  const start = document.createElement('button'); start.type='button'; start.className='start-item';
+  const start = document.createElement('button'); start.type='button'; start.className='start-item'; start.dataset.open=entry.id;
   start.innerHTML=`${entryIcon(entry)}<span>${entry.startTitle || entry.title}</span>`;
   if (entry.desktop === false) launchers.set(entry.id,start);
   start.addEventListener('click',()=>{closeStart();openWindow(entry.id,true);});
@@ -72,7 +72,7 @@ function projectContent(project) {
   return `<div class="explorer-toolbar"><button type="button" class="raised small-button" data-window-minimize>← Desktop</button><span class="address"><span>Address</span><span>C:\\Projects\\${project.name}</span></span></div><div class="explorer-body"><nav class="file-list" aria-label="${project.name} files"><span class="tree-root">${projectIcon(project)} ${project.name}</span><button type="button" class="file-tab selected" data-file="overview" aria-pressed="true">${svg('paper')} readme.txt</button><button type="button" class="file-tab" data-file="preview" aria-pressed="false">${svg('image')} preview.img</button><span class="file-count">2 files</span></nav><div class="file-content inset"><section data-pane="overview"><div class="document-heading">${svg('paper')}<span>readme.txt<small>${project.category}</small></span></div><h2>${project.name}</h2><p class="project-summary">${project.summary}</p><p class="project-description">${project.description}</p><dl>${project.details.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl><div class="project-link-row">${project.pending?`<span class="status-tag">IN DEVELOPMENT</span><span class="project-domain">${new URL(project.url).hostname}</span>`:`<a class="raised link-button" href="${project.url}" target="_blank" rel="noopener noreferrer">Visit website ↗<span class="sr-only"> (opens in a new tab)</span></a><span class="project-domain">${new URL(project.url).hostname}</span>`}</div></section><section data-pane="preview" hidden>${projectStudy(project)}<p class="preview-caption">${project.caption}</p></section></div></div><div class="window-status"><span>2 objects</span><span>${project.pending?'Work in progress':'Artist website'}</span></div>`;
 }
 function aboutContent() {
-  return `<div class="notepad-toolbar"><span>Plain text document</span><span>UTF-8</span></div><div class="notepad-paper inset"><div class="readme-intro">${svg('computer')}<div><h2>Daniel Peterson</h2><p>Websites & independent projects.</p></div></div><div class="readme-divider">────────────────────────────</div><p>Welcome to my desktop.</p><p class="desktop-instructions"><span class="mouse-instruction">Double-click a folder to open it.</span><span class="touch-instruction">Tap a folder to open it.</span><br>Drag title bars to move windows.</p><div class="readme-actions"><button type="button" class="raised" id="explore-projects">Open projects</button><button type="button" class="raised" data-launch="display">Change theme</button></div></div><div class="window-status"><span>${projects.length} project folders</span><span>personal computer</span></div>`;
+  return `<div class="notepad-toolbar"><span>Plain text document</span><span>UTF-8</span></div><div class="notepad-paper inset"><div class="readme-intro">${svg('computer')}<div><h2>Daniel Peterson</h2><p>Websites & independent projects.</p></div></div><div class="readme-divider">────────────────────────────</div><p>Welcome to my desktop.</p><p class="desktop-instructions"><span class="mouse-instruction">Double-click a folder to open it.</span><span class="touch-instruction">Tap a folder to open it.</span><br>Drag title bars to move windows.</p><div class="readme-actions"><button type="button" class="raised" id="explore-projects">Open projects</button><button type="button" class="raised" data-launch="display">Change theme</button></div></div><div class="window-status"><span>Ready</span><span>TXT</span></div>`;
 }
 function guestbookContent() {
   return `<div class="guestbook-body"><div class="guestbook-heading">${svg('notebook')}<div><h2>Guestbook</h2><p>Notes are stored on this device only.</p></div></div><div id="guestbook-notes" class="guestbook-notes inset"></div><form id="note-form"><label for="note-name">Name</label><input class="inset" id="note-name" name="name" maxlength="32" required autocomplete="nickname" placeholder="Your name"><label for="note-message">Message</label><textarea class="inset" id="note-message" name="message" maxlength="280" rows="3" required placeholder="Write a note"></textarea><div class="form-bottom"><span id="character-count">0 / 280</span><button type="submit" class="raised">Save note</button></div><p id="form-error" role="alert" hidden></p><p id="note-status" role="status"></p></form></div><div class="window-status"><span>Visitor log</span><span>Local storage</span></div>`;
@@ -120,7 +120,6 @@ function makeWindow(entry,index) {
 }
 for(const [index,entry] of entries.entries()){launchIcon(entry);makeWindow(entry,index);}
 const sourceLink=document.createElement('a');sourceLink.className='desktop-icon';sourceLink.href='https://github.com/dpeterzen/portfolio';sourceLink.target='_blank';sourceLink.rel='noopener noreferrer';sourceLink.setAttribute('aria-label','Source on GitHub, opens in a new tab');sourceLink.innerHTML=`<span class="icon-art">${svg('source')}<span class="shortcut-arrow" aria-hidden="true">↗</span></span><span class="icon-label">Source</span>`;icons.append(sourceLink);
-document.querySelector('.start-foot').textContent=`${projects.length} projects · built independently`;
 
 function renderWindows() {
   for(const entry of entries){
@@ -204,6 +203,27 @@ if(projects.some(project=>location.hash===`#${project.id}`))syncRoute();else{ope
 
 window.PortfolioSecrets.init({open:openWindow,close:id=>controlWindow(id,'close'),projectList:projects});
 
-document.querySelector('#restart-desktop').addEventListener('click', () => window.PortfolioTheme.restart());
+let rebooting = false;
+document.querySelector('#restart-desktop').addEventListener('click', () => {
+  if (rebooting) return;
+  rebooting = true;
+  closeStart();
+  if (reduced.matches || document.documentElement.dataset.motion === 'off') {
+    window.PortfolioTheme.restart();
+    return;
+  }
+  const screen = document.createElement('div');
+  screen.className = 'reboot-screen';
+  screen.tabIndex = -1;
+  screen.setAttribute('role','status');
+  screen.setAttribute('aria-live','polite');
+  screen.innerHTML = `<div class="reboot-console"><img src="${document.querySelector('link[rel="icon"]').getAttribute('href')}" width="28" height="28" alt=""><span>Rebooting…</span><div class="reboot-meter" aria-hidden="true">${Array.from({length:8},(_,i)=>`<i style="--segment:${i}"></i>`).join('')}</div></div>`;
+  // Keep focus and shortcuts off the desktop during the short reboot.
+  for (const child of document.body.children) child.inert = true;
+  document.body.append(screen);
+  screen.focus({preventScroll:true});
+  screen.addEventListener('keydown', event => { event.preventDefault(); event.stopPropagation(); });
+  window.setTimeout(() => window.PortfolioTheme.restart(),1400);
+});
 
 desktopReady = true;

@@ -48,7 +48,7 @@
     const lampButton = document.querySelector('#desk-lamp');
     const history = []; let historyIndex = 0, draft = '';
     let lamp = {dune:true,keep:true,coda:true};
-    let lampScene = null, lampHintTimer;
+    let lampScene = null, lampHintTimer, lampReveal;
     const found = new Set();
     try {
       const saved = JSON.parse(localStorage.getItem('portfolio-lamps-v1'));
@@ -67,10 +67,14 @@
       root.dataset.lampCoda = lamp.coda ? 'on' : 'off';
       const indoors = root.dataset.wallpaperScene === 'room';
       const scene = `${currentTheme()}:${indoors}`;
-      if (lampScene !== scene) {
+      const sceneChanged = lampScene !== scene;
+      const automatic = lampScene?.split(':')[0] === currentTheme() && root.dataset.wallpaperTransition === 'auto';
+      const animateReveal = root.dataset.motion !== 'off' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealDelay = animateReveal ? (automatic ? 1250 : 260) : 0;
+      if (sceneChanged) {
         lampScene = scene; clearTimeout(lampHintTimer);
         lampButton.dataset.hint = 'visible';
-        lampHintTimer = setTimeout(() => { delete lampButton.dataset.hint; },4500);
+        lampHintTimer = setTimeout(() => { delete lampButton.dataset.hint; },4500 + revealDelay);
       }
       lampButton.hidden = false;
       if (indoors) lampButton.setAttribute('aria-pressed', String(lamp[currentTheme()]));
@@ -87,6 +91,15 @@
         const hintBounds = hint.getBoundingClientRect();
         const shift = Math.max(bounds.left + 8 - hintBounds.left, Math.min(0,bounds.right - 8 - hintBounds.right));
         hint.style.setProperty('--hint-shift',`${shift}px`);
+      }
+      if (sceneChanged) {
+        lampReveal?.cancel();
+        // The target moves with the incoming artwork; reveal it after that
+        // scene becomes legible, rather than flashing over the outgoing one.
+        if (animateReveal && !lampButton.hidden) lampReveal = lampButton.animate(
+          [{opacity:0},{opacity:1}],
+          {duration:automatic ? 500 : 360,delay:revealDelay,fill:'backwards',easing:'cubic-bezier(.2,.7,.2,1)'}
+        );
       }
       if (lampButton.hidden && document.activeElement === lampButton) document.querySelector('#start-button').focus({preventScroll:true});
     }

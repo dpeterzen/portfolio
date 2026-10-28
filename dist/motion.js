@@ -75,7 +75,7 @@
         : 'Gentle sky effects, background drift and text reveals.';
     }
     if (root.dataset.motion === 'off') {
-      document.querySelectorAll('.app-window, .lamp-glow, .coda-flight').forEach(app => {
+      document.querySelectorAll('.app-window, .lamp-glow, .coda-flight, #desk-lamp').forEach(app => {
         app.getAnimations().forEach(animation => animation.cancel());
       });
     }
