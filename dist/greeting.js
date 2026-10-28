@@ -6,7 +6,7 @@
   const notepad = document.querySelector('#window-about');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const greetings = [
-    ['en', 'hello world'],
+    ['en', 'Hello world!'],
     ['ko', '안녕, 세상!'],
     ['el', 'Γεια σου, κόσμε!'],
     ['zh-Hans', '你好，世界！'],
