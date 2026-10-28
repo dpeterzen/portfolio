@@ -18,7 +18,7 @@
     const index = scenes.indexOf(root.dataset.wallpaperScene);
     root.dataset.wallpaperTransition = manual ? 'manual' : 'auto';
     root.dataset.wallpaperScene = scenes[(index + direction + scenes.length) % scenes.length];
-    status.textContent = manual ? (root.dataset.wallpaperScene === 'city' ? 'City view' : 'Indoor view') : '';
+    status.textContent = manual ? (root.dataset.wallpaperScene === 'city' ? (theme === 'coda' ? 'Cavern view' : 'City view') : 'Indoor view') : '';
   }
 
   function schedule() {
@@ -38,12 +38,17 @@
     });
   });
 
+  document.addEventListener('portfolio:enter-room', () => {
+    if (root.dataset.wallpaperScene !== 'room') advance(1,true);
+    schedule();
+  });
+
   function syncControl() {
     control.checked = enabled && !motion.matches;
     control.disabled = motion.matches;
     hint.textContent = motion.matches
       ? 'Automatic cycling is off with reduced motion. Use the arrows to switch views.'
-      : 'City first, then indoors. Your settings are saved on this device.';
+      : `${theme === 'coda' ? 'Cavern' : 'City'} first, then indoors. Your settings are saved on this device.`;
   }
 
   control.addEventListener('change', () => {
@@ -54,8 +59,9 @@
   document.addEventListener('portfolio:theme', event => {
     if (event.detail.theme === theme) return;
     theme = event.detail.theme;
-    root.dataset.wallpaperScene = 'city';
-    status.textContent = '';
+    syncControl();
+    // Theme and viewpoint are independent; keep the chevrons’ current view.
+    status.textContent = root.dataset.wallpaperScene === 'city' ? (theme === 'coda' ? 'Cavern view' : 'City view') : 'Indoor view';
     schedule();
   });
   document.addEventListener('visibilitychange', schedule);

@@ -3,9 +3,9 @@ window.PORTFOLIO_PROJECTS = [
   {
     id: 'tilerecall', name: 'TileRecall', kind: 'A place for what you find',
     category: 'Web application', status: 'In development', pending: true,
-    url: 'https://tilerecall.com', visual: 'tiles', number: '01',
+    url: 'https://tilerecall.com', icon: 'assets/tilerecall-mark.svg', visual: 'tiles', number: '01',
     summary: 'Keep the internet worth keeping.',
-    description: 'A visual workspace for saving notes, images, links, and documents. Arrange them on a canvas, find connections, and pick up where you left off.',
+    description: 'Save notes, images, links, and documents on a visual canvas.',
     details: [['Canvas', 'A place to collect and arrange.'], ['Recall', 'Search across what you saved.'], ['AI', 'Chat with the context on your wall.']],
     caption: 'A conceptual sketch of a TileRecall wall.'
   },
@@ -14,7 +14,7 @@ window.PORTFOLIO_PROJECTS = [
     category: 'Artist website', status: 'Website', pending: false,
     url: 'https://ruthiepaintings.com', visual: 'paintings', number: '02',
     summary: 'A space for the paintings.',
-    description: 'A website for Ruthie’s artwork. An online home for the paintings, built to let the work speak for itself.',
+    description: 'A website showcasing Ruthie’s artwork.',
     details: [['Project', 'An independent artist’s website.'], ['Explore', 'Visit the site to see the artwork.']],
     caption: 'An abstract gallery study, not a reproduction of Ruthie’s artwork.'
   }

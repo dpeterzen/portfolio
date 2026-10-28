@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 :root{color-scheme:light;--chrome:#c6bba1;--chrome-mid:#b0a58d;--bevel-light:#ede2c7;--bevel-shadow:#716653;--bevel-dark:#3e382f;--ink:#352f25;--muted:#776b57;--paper:#e3dac4;--folder:#ceaf70;--folder-light:#ecd19a;--folder-dark:#a68c58;--icon-edge:#473e2c;--screen:#514c39;--screen-ink:#d7d1a6;--title:#62523a;--title-end:#8b7957;--title-ink:#f3e4c7;--desktop-ink:#e4d6b6;--selection:#7c6749;--selection-ink:#fff1d3;--wall:#493f32;--pixel:'Pixelify Sans','Courier New',monospace;--mono:'IBM Plex Mono','Courier New',monospace;--ui:Tahoma,Verdana,Arial,sans-serif}
 
 *{box-sizing:border-box}
@@ -26,8 +26,7 @@ button:disabled{opacity:.5;cursor:default}
 .keep-room{background-image:url('assets/keep-office-cross.png?v=2')}
 .wallpaper-room{opacity:0;transition:opacity 5s ease-in-out}
 [data-wallpaper-transition=manual] .wallpaper-room{transition-duration:.6s}
-[data-theme=dune][data-wallpaper-scene=room] .dune-room,[data-theme=keep][data-wallpaper-scene=room] .keep-room{opacity:1}
-[data-theme=dune] .keep-room,[data-theme=keep] .dune-room{transition:none}
+[data-wallpaper-scene=room] .wallpaper-room{opacity:1}
 .desktop-topbar{height:34px;position:fixed;inset:0 0 auto;z-index:10000;display:flex;align-items:center;justify-content:space-between;padding:0 13px;color:var(--desktop-ink);background:color-mix(in srgb,var(--wall) 88%,transparent);border-bottom:1px solid #ffffff15;font:12px var(--pixel);letter-spacing:.3px}
 .os-name{display:flex;gap:10px;align-items:center}
 .os-name svg{width:12px;height:12px;shape-rendering:crispEdges}
@@ -334,3 +333,259 @@ input::placeholder,textarea::placeholder{color:var(--muted)}
 
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+/* Crisp mono text, with motion confined to brief entrances and the scenery. */
+:root{--ui:var(--mono);--muted:#625540;--desktop-ink:#fff0d0;--mote:#f4d6a1;--haze:#dc9c4e}
+[data-theme=keep]{--ink:#e2e9f0;--muted:#bdcddd;--desktop-ink:#e5f1fc;--mote:#cce5ff;--haze:#92bfe9}
+body{font-weight:400;text-rendering:optimizeLegibility}
+.desktop-topbar,.theme-switch button{font:500 12px var(--mono);letter-spacing:0}
+.owner-name{opacity:.9}
+.icon-label{font:500 12px/1.45 var(--mono);background:color-mix(in srgb,var(--wall) 80%,transparent);text-shadow:none;padding:3px 5px}
+.desktop-icon:hover .icon-label{background:var(--selection);color:var(--selection-ink)}
+.desktop-icon .icon-art{transition:transform .2s ease}
+.desktop-icon:hover .icon-art,.desktop-icon:focus-visible .icon-art{transform:translateY(-3px)}
+.desktop-caption{opacity:.85;font:500 11px var(--mono);letter-spacing:.2px}
+.desktop-caption small{font-size:9px}
+.window-titlebar{font:500 12px var(--mono)}
+.notepad-paper{font:13px/1.75 var(--mono)}
+.readme-intro h2,.file-content h2,.guestbook-heading h2{font:500 23px/1.3 var(--mono);letter-spacing:-.7px}
+.readme-intro p{font:11px/1.6 var(--mono)}
+.notepad-paper .desktop-instructions{font-size:11px;line-height:1.7}
+.project-summary{font-size:13px;line-height:1.7}
+.project-description{font-size:12px;line-height:1.85}
+.window-status{font-size:10px;color:var(--ink)}
+.start-button{font:500 15px var(--mono)}
+.start-banner>span{font:500 21px var(--mono)}
+.wallpaper-options strong{font:500 14px var(--mono)}
+.motion-setting{display:flex;gap:9px;align-items:center;font-size:11px;margin:18px 0 7px;cursor:pointer}
+.motion-setting input{width:15px;height:15px;margin:0;accent-color:var(--selection);flex-shrink:0}
+.motion-note{font-size:10px;line-height:1.6;color:var(--muted);margin:0 0 10px}
+.settings-hint{margin:12px 0}
+
+.ambient{position:fixed;inset:34px 0 47px;pointer-events:none;overflow:hidden;z-index:0;contain:strict}
+.ambient-haze{position:absolute;inset:-15%;background:radial-gradient(ellipse at 75% 70%,color-mix(in srgb,var(--haze) 17%,transparent),transparent 55%),radial-gradient(ellipse at 25% 20%,color-mix(in srgb,var(--haze) 10%,transparent),transparent 45%);animation:haze-drift 28s ease-in-out infinite alternate}
+.ambient-particles{position:absolute;inset:0}
+.ambient-particles i{position:absolute;left:var(--x);top:var(--y);width:2px;height:2px;background:var(--mote);opacity:0;box-shadow:0 0 5px color-mix(in srgb,var(--mote) 35%,transparent);animation:mote-drift var(--duration) var(--delay) ease-in-out infinite}
+.ambient-particles i:nth-child(3n){width:3px;height:3px}
+[data-theme=keep] .ambient-haze{opacity:.75}
+@keyframes haze-drift{from{transform:translate(-2%,1%);opacity:.55}to{transform:translate(3%,-2%);opacity:1}}
+@keyframes mote-drift{0%{transform:translate(0,25px);opacity:0}25%{opacity:.4}65%{opacity:.55}100%{transform:translate(var(--drift),-90px);opacity:0}}
+@keyframes text-reveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes text-arrive{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes cursor-goodbye{0%,45%{opacity:1}46%,70%{opacity:0}71%,85%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:no-preference){
+  html:not([data-motion=off]) .app-window:not([hidden]) .readme-intro h2,
+  html:not([data-motion=off]) .app-window:not([hidden]) .file-content h2,
+  html:not([data-motion=off]) .app-window:not([hidden]) .guestbook-heading h2{animation:text-reveal .7s .12s steps(18,end) backwards}
+  html:not([data-motion=off]) .readme-intro h2:after{content:'';display:inline-block;width:.48em;height:2px;margin-left:3px;background:var(--muted);animation:cursor-goodbye 2.4s forwards}
+  html:not([data-motion=off]) .notepad-paper>p,
+  html:not([data-motion=off]) .project-summary{animation:text-arrive .45s .28s ease-out backwards}
+  html:not([data-motion=off]) .notepad-paper>p:nth-of-type(2){animation-delay:.4s}
+  html:not([data-motion=off]) .desktop-caption{animation:text-arrive .8s .4s ease-out backwards}
+}
+html[data-motion=off] *,html[data-motion=off] *:before,html[data-motion=off] *:after{animation:none!important}
+html[data-motion=off] .ambient,html[data-motion=off] .readme-intro h2:after{display:none}
+html[data-motion-paused=true] *,html[data-motion-paused=true] *:after{animation-play-state:paused!important}
+@media(max-width:639px){
+  .readme-intro h2{font-size:20px}
+  .readme-intro{gap:10px}
+  .readme-intro .pixel-icon{width:36px;height:36px}
+  .readme-intro p{font-size:10px}
+  .notepad-paper>p,.project-summary,.project-description{font-size:12px}
+  .desktop-instructions .touch-instruction{font-size:11px}
+  .desktop-caption{font-size:9px}
+  .desktop-caption small{font-size:8px}
+  .window-titlebar{font-size:11px}
+  .start-button{font-size:13px}
+  .ambient-particles i:nth-child(n+11){display:none}
+}
+@media(prefers-reduced-motion:reduce){.ambient,.readme-intro h2:after{display:none}}
+
+/* Match background-size: cover and its horizontal crop, so stars stay in sky. */
+.wallpaper-scene{overflow:hidden}
+.sky-canvas{position:absolute;top:0;left:var(--scene-position,70%);width:max(100%,calc((100vh - 34px)*1.777));aspect-ratio:1672/941;transform:translateX(calc(-1 * var(--scene-position,70%)));pointer-events:none;opacity:1;transition:opacity 2s ease}
+.sky-stars{position:absolute;inset:0}
+.sky-stars i{position:absolute;width:3px;height:3px;background:var(--mote);opacity:.25;animation:star-twinkle var(--twinkle-duration) var(--twinkle-delay) ease-in-out infinite}
+.sky-stars i:after{content:'';position:absolute;inset:-2px;background:var(--mote);clip-path:polygon(40% 0,60% 0,60% 40%,100% 40%,100% 60%,60% 60%,60% 100%,40% 100%,40% 60%,0 60%,0 40%,40% 40%);opacity:.45}
+.shooting-star{position:absolute;top:5%;left:38%;width:6%;height:2px;opacity:0;transform:rotate(18deg);transform-origin:right center;background:linear-gradient(90deg,transparent,var(--mote));animation:shooting-star 23s 4s linear infinite}
+.shooting-star:after{content:'';position:absolute;right:0;top:-1px;width:3px;height:3px;background:var(--mote)}
+.shooting-star.second{left:49%;top:3%;width:4%;animation-duration:37s;animation-delay:15s}
+@keyframes star-twinkle{0%,36%,68%,100%{opacity:.18}49%{opacity:.9}56%{opacity:.4}}
+@keyframes shooting-star{0%{opacity:0;transform:translate(0,0) rotate(18deg)}1%{opacity:.8}5%{opacity:0;transform:translate(15vw,4.8vw) rotate(18deg)}100%{opacity:0;transform:translate(15vw,4.8vw) rotate(18deg)}}
+[data-wallpaper-scene=room] .sky-canvas{opacity:0}
+[data-wallpaper-scene=room] .sky-canvas *{animation-play-state:paused}
+[data-wallpaper-transition=manual] .sky-canvas{transition-duration:.3s}
+html[data-motion=off] .sky-canvas{display:none}
+@media(max-width:639px){.sky-canvas{width:max(100%,calc((100vh - 33px)*1.777))}}
+@media(prefers-reduced-motion:reduce){.sky-canvas{display:none}}
+
+/* Discoveries live in the existing desktop, without changing its chrome. */
+.terminal-screen{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--screen);color:var(--screen-ink);padding:19px 20px;font:12px/1.75 var(--mono)}
+.terminal-output{flex:1;min-height:0;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--chrome-mid) var(--screen)}
+.terminal-output p{white-space:pre-wrap;overflow-wrap:anywhere;margin:0 0 13px}
+.terminal-command{color:var(--bevel-light)}
+.terminal-welcome{padding-bottom:12px;border-bottom:1px dotted var(--chrome-mid)}
+.terminal-form{display:flex;align-items:center;gap:9px;margin-top:12px;border-top:1px solid var(--chrome-mid);padding-top:10px}
+.terminal-form label{margin:0;white-space:nowrap;font:inherit}
+.terminal-form input{min-width:0;flex:1;padding:4px 2px;background:transparent;color:inherit;font:inherit;box-shadow:none;outline-offset:2px;caret-color:currentColor}
+.terminal-enter{background:none;color:inherit;border:1px solid var(--chrome-mid);padding:3px 8px;min-height:30px}
+.terminal-hint{font-size:9px;opacity:.8;margin:10px 0 0}
+.letter-paper{flex:1;overflow:auto;background:var(--paper);padding:26px 28px;font:12px/1.9 var(--mono)}
+.letter-subject{font-weight:500;font-size:14px;margin:0 0 23px;max-width:28ch;line-height:1.6}
+.letter-paper p{margin-bottom:18px}
+.letter-signature{color:var(--muted);font-size:11px}
+.letter-clue{border-top:1px dashed var(--chrome-mid);padding-top:18px;color:var(--muted);font-size:10px;margin-top:25px}
+.desktop-icon[data-open=letter] .icon-art{opacity:.78}
+.artwork-plane{position:absolute;top:0;left:var(--scene-position,70%);width:max(100%,calc((100vh - 34px)*1.7768331562));aspect-ratio:1672/941;transform:translateX(calc(-1 * var(--scene-position,70%)));pointer-events:none}
+.room-light{opacity:0;transition:opacity 1s cubic-bezier(.22,1,.36,1);background:radial-gradient(ellipse at 73.2% 64.3%,transparent 0 .7%,#17100b35 2.7%,#17100b85 12%,#17100b9c 65%)}
+.keep-room .room-light{background:radial-gradient(ellipse at 78% 64%,transparent 0 .7%,#02071830 2.7%,#02071880 12%,#02071899 65%)}
+[data-lamp-dune=off] .dune-room .room-light,[data-lamp-keep=off] .keep-room .room-light{opacity:1}
+#scene-interactions{position:absolute;inset:0;overflow:clip;pointer-events:none;z-index:0}
+#desk-lamp{position:absolute;left:71.1%;top:59.2%;transform:translate(-50%,-50%);width:4.2%;height:8%;min-width:44px;min-height:44px;border:0;background:transparent;pointer-events:auto;border-radius:50%;color:var(--desktop-ink)}
+[data-theme=keep] #desk-lamp{left:75.5%;top:60.3%}
+#desk-lamp:hover,#desk-lamp:focus-visible{background:radial-gradient(ellipse,#ffe1a515,transparent 70%)}
+#desk-lamp:focus-visible{outline:1px dotted var(--desktop-ink);outline-offset:2px}
+.lamp-hint{position:absolute;top:100%;left:50%;transform:translateX(calc(-50% + var(--hint-shift,0px)));padding:4px 6px;background:var(--wall);font:9px/1.4 var(--mono);white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none}
+#desk-lamp:hover .lamp-hint,#desk-lamp:focus-visible .lamp-hint{opacity:1}
+html[data-motion=off] .room-light{transition:none}
+@media(max-width:639px){
+  .artwork-plane{width:max(100%,calc((100vh - 33px)*1.7768331562))}
+  #scene-interactions{--scene-position:80%}
+  [data-theme=keep][data-wallpaper-scene=room] #scene-interactions{--scene-position:85%}
+  .letter-paper{padding:23px 20px}
+  .terminal-screen{padding:17px 14px;font-size:12px}
+}
+
+/* Coda: an easy-to-find third place, with messages instead of a night sky. */
+[data-theme=coda]{color-scheme:dark;--chrome:#4c5952;--chrome-mid:#39473f;--bevel-light:#87958b;--bevel-shadow:#24312b;--bevel-dark:#101b17;--ink:#e1e8df;--muted:#b2c2b6;--paper:#26352e;--folder:#9faf98;--folder-light:#d1d8bc;--folder-dark:#697d6c;--icon-edge:#1b2b23;--screen:#12241d;--screen-ink:#c2d6bd;--title:#233d31;--title-end:#647b68;--title-ink:#ecf0de;--desktop-ink:#e1e9d4;--selection:#637e6a;--selection-ink:#fffbed;--wall:#101c19;--mote:#b2d6c5;--haze:#bc8e55}
+.notes-wallpaper{position:fixed;inset:34px 0 0;z-index:-1;background:#101c19;opacity:0;transition:opacity .25s;pointer-events:none}
+.notes-city{background-image:url('assets/notes-cavern-cross.png')}
+.notes-room{background-image:url('assets/notes-study-cross.png')}
+[data-theme=coda] .notes-wallpaper{opacity:1}
+[data-theme=coda] .wallpaper-dune{opacity:0}
+.sample-notes{background-image:url('assets/notes-cavern-cross.png')}
+.notes-room .room-light{background:radial-gradient(ellipse at 86.6% 65.4%,transparent 0 .7%,#06141030 2.7%,#06141085 12%,#06141099 65%)}
+[data-lamp-coda=off] .notes-room .room-light{opacity:1}
+[data-theme=coda] #desk-lamp{left:87.2%;top:57.3%}
+.wallpaper-options{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.wallpaper-options small{font-size:9px;overflow-wrap:anywhere}
+html:not([data-theme=coda]) .desktop-icon[data-open=notes]{display:none}
+#world-notes{position:absolute;inset:0;pointer-events:none}
+.world-note{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border:0;background:transparent;padding:0;pointer-events:auto;color:#091b25}
+.note-glyph{position:absolute;inset:8px;display:grid;place-items:center;background:#7ad5f5;font:600 14px var(--mono);clip-path:polygon(50% 0,59% 26%,79% 10%,76% 37%,100% 35%,82% 54%,98% 75%,70% 72%,66% 100%,50% 80%,31% 100%,30% 72%,3% 78%,18% 54%,0 34%,26% 37%,20% 10%,41% 26%);transition:background .2s,transform .2s}
+.world-note:hover .note-glyph,.world-note:focus-visible .note-glyph{transform:scale(1.16)}
+.world-note:focus-visible{outline:1px dotted #d4f5ff;outline-offset:-3px}
+.found-notes-layout{display:flex;flex-direction:column;flex:1;min-height:0;gap:5px}
+.found-note-paper{flex:1;min-width:0;overflow:auto;display:flex;flex-direction:column;background:var(--paper);padding:27px}
+.found-note-location{font:10px/1.6 var(--mono);color:var(--muted);margin:0}
+#found-note-text{font:400 23px/1.6 var(--mono);margin:35px 0 25px;overflow-wrap:anywhere}
+.found-note-caption{font:10px/1.7 var(--mono);color:var(--muted)}
+.notes-source{margin-top:auto;padding-top:25px;font:9px/1.8 var(--mono);color:var(--muted);text-underline-offset:3px}
+@media(max-width:639px){
+  .notes-wallpaper{top:33px}
+  .notes-room{--scene-position:90%}
+  .notes-city{--scene-position:100%}
+  [data-theme=coda][data-wallpaper-scene=room] #scene-interactions{--scene-position:90%}
+  [data-theme=coda][data-wallpaper-scene=city] #scene-interactions{--scene-position:100%}
+  .desktop-controls{gap:6px}
+  .scene-switch{padding-right:5px}
+  .scene-switch button{width:23px}
+  .theme-switch button{padding-inline:7px;font-size:11px}
+  .wallpaper-options{gap:6px}
+  .wallpaper-options small{font-size:8px}
+  .found-notes-layout{flex-direction:column}
+  .found-note-list{width:100%;flex-direction:row;flex-wrap:wrap;padding:5px;gap:2px;overflow:visible}
+  .found-note-list button{padding:7px;font-size:10px}
+  .found-note-paper{padding:25px 20px}
+  #found-note-text{font-size:23px}
+  [data-theme=coda] .desktop-caption{max-width:90%;font-size:8px}
+}
+
+/* Coda is discovered through its desktop executable or terminal command. */
+html:not([data-coda-unlocked=true]) [data-theme-choice=coda],
+html:not([data-coda-unlocked=true]) .start-item[data-open=notes]{display:none}
+html:not([data-coda-unlocked=true]) .wallpaper-options{grid-template-columns:repeat(2,minmax(0,1fr))}
+.os-name>img{image-rendering:pixelated;flex-shrink:0}
+.coda-launcher{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%);z-index:1}
+.coda-launcher img{image-rendering:pixelated;width:48px;height:48px}
+.coda-launcher:hover,.coda-launcher:focus-visible{background:#ffffff12;outline:1px dotted var(--desktop-ink)}
+[data-theme=coda] .coda-launcher{display:none}
+@media(max-width:639px){
+  .os-name{display:grid;grid-template-columns:16px auto;column-gap:7px;row-gap:1px;align-items:center;max-width:145px;font-size:10px;line-height:12px}
+  .os-name>img{grid-column:1;grid-row:1 / 3;align-self:center}
+  .os-name>span:not(.topbar-divider){grid-column:2}
+  .os-name .owner-name{display:block;width:auto;padding-left:0;font-size:9px;line-height:11px;white-space:nowrap;opacity:.75}
+  .os-name .topbar-divider{display:none}
+  .coda-launcher{left:77%;top:57%}
+}
+
+.restart-desktop{border-top:1px solid var(--chrome-mid);margin-top:5px}
+.restart-desktop>span{width:24px;text-align:center;font-size:22px}
+
+.coda-intro{flex-shrink:0;padding:10px 14px;border-bottom:1px solid var(--chrome-mid);font:11px/1.65 var(--mono);max-height:185px;overflow:auto}
+.coda-intro summary{cursor:pointer;color:var(--ink)}
+.coda-intro p{margin:8px 0;color:var(--ink)}
+.coda-intro a{color:inherit;text-underline-offset:3px}
+.found-note-paper>*{flex-shrink:0}
+@media(max-width:639px){.coda-intro{max-height:170px;font-size:10px}}
+
+.note-navigation{display:flex;align-items:center;justify-content:center;gap:9px;padding:6px 10px;flex-shrink:0}
+.note-navigation button{width:32px;height:30px;background:transparent;border:1px solid var(--chrome-mid);color:var(--ink);font:16px var(--mono)}
+.note-navigation button:hover{background:var(--selection)}
+#note-select{appearance:none;-webkit-appearance:none;width:128px;max-width:100%;height:30px;border:1px solid var(--chrome-mid);background:var(--paper);color:var(--ink);font:11px var(--mono);padding:4px 32px 4px 10px}
+.notes-total{font:10px var(--mono);color:var(--muted)}
+
+.note-select-wrap{position:relative;display:inline-flex;flex-shrink:0}
+.note-select-chevron{position:absolute;right:12px;top:10px;width:7px;height:7px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:rotate(45deg);pointer-events:none}
+
+/* Discoverable lamp control; light stays within the scene. */
+#desk-lamp{border:1px dotted #f4d29570;box-shadow:0 0 12px #ffdb9b18}
+.lamp-hint{opacity:0;border:1px solid #ffffff2b;border-radius:4px;background:linear-gradient(#ffffff08,#ffffff00),color-mix(in srgb,var(--wall) 62%,transparent);backdrop-filter:blur(8px) saturate(115%);-webkit-backdrop-filter:blur(8px) saturate(115%);box-shadow:inset 0 1px 0 #ffffff0a,0 3px 12px #0002;padding:5px 8px;pointer-events:none;color:var(--desktop-ink);font-size:10px}
+.lamp-hint::before{content:'';display:inline-block;width:5px;height:5px;margin-right:6px;vertical-align:1px;background:#eac789}
+#desk-lamp[aria-pressed=false] .lamp-hint::before{background:#8d9692}
+.lamp-glow{position:absolute;inset:-60%;border-radius:50%;background:radial-gradient(ellipse,#ffe0a950,transparent 65%);opacity:0;pointer-events:none}
+.window-ghost,.window-ghost *{pointer-events:none!important;animation:none!important;resize:none!important}
+.window-ghost{user-select:none}
+
+.coda-flight{position:fixed;top:0;left:0;z-index:20001;pointer-events:none;margin:0;transform-origin:center}
+.coda-flight button{width:100%;height:100%;margin:0;background:var(--wall);color:var(--desktop-ink);border:1px solid currentColor;box-shadow:0 3px 10px #0005;white-space:nowrap}
+
+/* Scene hints fade after discovery; hover and keyboard focus bring them back. */
+.lamp-hint{transition:opacity 1.6s cubic-bezier(.4,0,.2,1)}
+#desk-lamp[data-hint=visible] .lamp-hint,#desk-lamp:hover .lamp-hint,#desk-lamp:focus-visible .lamp-hint{opacity:.9;pointer-events:auto;transition-duration:.25s}
+[data-wallpaper-scene=city] #desk-lamp{left:72.75%;top:61.8%;width:4.2%;height:7.5%}
+[data-theme=keep][data-wallpaper-scene=city] #desk-lamp{left:72.7%;top:49.8%}
+[data-theme=coda][data-wallpaper-scene=city] #desk-lamp{left:91.6%;top:42.5%}
+html[data-motion=off] .lamp-hint{transition:none}
+/* Empty space between desktop icons must not cover scenery controls. */
+.desktop-icons{pointer-events:none}
+.desktop-icons>.desktop-icon{pointer-events:auto}
+
+.project-brand-icon{object-fit:contain;image-rendering:auto}
+
+/* TileRecall: a finite blue shimmer, then a uniform brand-blue phosphor core. */
+.phosphor-mark{position:relative;isolation:isolate;line-height:0;overflow:visible}
+.icon-art>.phosphor-mark{filter:none}
+.phosphor-mark>span,.phosphor-mark>svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.phosphor-bloom,.phosphor-fringe{mask:url('assets/tilerecall-mark.svg') center/contain no-repeat}
+.phosphor-bloom{background:#7d9ef5;opacity:.2;filter:blur(2px)}
+.phosphor-fringe{opacity:.22}
+.phosphor-warm{background:#eb6834;transform:translate(-.7px,-.28px)}
+.phosphor-cool{background:#1ee7ff;transform:translate(.7px,.42px)}
+.phosphor-core{object-fit:contain;filter:drop-shadow(0 0 .35px #8aabff55);mask-image:repeating-linear-gradient(180deg,#000 0 2px,#000e 2px 3px,#000b 3px 4px),repeating-linear-gradient(90deg,#000 0 1px,#000d 1px 3px);mask-composite:intersect}
+@media(prefers-reduced-motion:no-preference){
+ html:not([data-motion=off]) :is(.desktop-icon,.start-item,.task-button):is(:hover,:focus-visible) .phosphor-warm{animation:brand-signal-warm .34s ease-out both}
+ html:not([data-motion=off]) :is(.desktop-icon,.start-item,.task-button):is(:hover,:focus-visible) .phosphor-cool{animation:brand-signal-cool .34s ease-out both}
+}
+@keyframes brand-signal-warm{from{transform:translate(-1.6px,-.3px)}to{transform:translate(-.7px,-.28px)}}
+@keyframes brand-signal-cool{from{transform:translate(1.6px,.35px)}to{transform:translate(.7px,.42px)}}
+
+.phosphor-core .brand-mark-piece{fill:#2e62ef}
+@media(prefers-reduced-motion:no-preference){
+ html:not([data-motion=off]) .phosphor-core .brand-mark-piece{animation:brand-blue-arrive 1.8s ease-in-out both;animation-delay:var(--piece-delay)}
+ html:not([data-motion=off]) :is(.desktop-icon,.start-item,.task-button):is(:hover,:focus-visible) .phosphor-core .brand-mark-piece{animation-name:brand-blue-signal}
+}
+@keyframes brand-blue-arrive{0%,100%{fill:#2e62ef}20%{fill:#3f5bc7}42%{fill:#5f7fe0}60%{fill:#8fb0ff}78%{fill:#6d8ff4}}
+@keyframes brand-blue-signal{0%,100%{fill:#2e62ef}20%{fill:#3f5bc7}42%{fill:#5f7fe0}60%{fill:#8fb0ff}78%{fill:#6d8ff4}}
+
+@media(max-width:639px){[data-theme=coda] #desk-lamp{min-width:52px;min-height:52px;border-color:#f4d295b3;box-shadow:0 0 0 3px #171e1860,0 0 14px #ffdb9b25}}

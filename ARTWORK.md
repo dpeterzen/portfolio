@@ -109,3 +109,45 @@ Use case: precise-object-edit. Make TWO subtle character edits in this full blue
 Final dragon prompt:
 
 Use case: precise-object-edit. Replace ONLY the sleeping dog on the floor beside the chair around x1397,y685 with a SMALL CUTE SLEEPING DRAGON. Keep the same location and approximately the same compact size as the dog, no bigger. A cozy baby dragon curled into a soft resting oval, eyes peacefully CLOSED, small rounded snout, two tiny horns, small folded batlike wings flat against its back, a long slender tail tucked around its body, little paws under its chin. The folded wings and curled tail should make it clearly a dragon, but it must remain understated and sleepy, not fierce. Dark charcoal/slate-blue scales with subtle lighter blue belly and restrained warm lamplight edge, matching the existing room palette and lo-fi pixel illustration. No fire, glow, big spikes, bright colors or accessories. Preserve absolutely everything else, especially the person's newly ragged tousled hair, person and pose, desk/chair/laptop, cross on the LEFT outdoor turret, architecture, texture, original composition and full wide dimensions. Output the whole wallpaper.
+
+
+## Coda — original cavern and study
+
+Generated with the built-in image tool. The generation brief used the working name Notes; the finished theme is named Coda. These are original environments inspired by The Beginner’s Guide, not game screenshots. The blue star favicon and interactive markers are code-native SVG/CSS.
+
+### Cavern
+
+Saved asset: `dist/assets/notes-cavern.png` (1672 × 941).
+Generated output: `/Users/danielpeterson/.codex/generated_images/01a181ed-4a24-78c1-b1ef-fa9c7c62e8cf/exec-0b5510ca-d1eb-4859-b3d0-b3db71072f30.png`
+
+Prompt:
+
+Create one wide 16:9 wallpaper illustration for a retro monospace desktop portfolio. Theme NOTES: inspired by the lonely experimental architecture and scattered messages of the Notes chapter of The Beginner's Guide, but an original scene, not a screenshot reproduction. Style must be restrained sophisticated low-resolution pixel art, crisp clustered pixels, deep charcoal teal shadows, concrete sage grey, small electric cyan details, warm amber light. Very wide establishing view of a monumental subterranean cavern and abstract modernist concrete paths and landings spiraling downward around a distant orange glowing pool. Black void beyond the architecture. Several distant door frames, thin railings, isolated pools of light. Right half contains a tiny lit study alcove with a small desk and an indistinct tiny person with tousled hair viewed from behind using a laptop. The person is tiny and environmental. A handful of small blue starburst note markers float quietly along the path, NO visible words or letters. Large calm dark negative space across upper left and left half for desktop icons and windows. Intricate compelling layered perspective concentrated on right half and lower half. Quiet, puzzling, inviting rather than horror. Matte color, no purple, no neon bloom, no UI, no titles, no logos, no legible text. Edge-to-edge environment, no border. Match the aesthetic of a warm desert pixel city and a midnight blue castle pixel city, but make this third world distinct and slightly austere. 16:9 landscape.
+
+### Study
+
+Saved asset: `dist/assets/notes-study.png` (1672 × 941).
+Generated output: `/Users/danielpeterson/.codex/generated_images/01a181ed-4a24-78c1-b1ef-fa9c7c62e8cf/exec-2194f6d8-51d2-48ef-8f2a-e89d65c7bbf5.png`
+
+Prompt:
+
+Create one 16:9 wide pixel art wallpaper, a companion INDOOR scene for NOTES, a retro desktop portfolio theme inspired by the lonely experimental architecture of The Beginner's Guide. Original art, not a game screenshot. Pixel art with crisp clustered pixels, restrained charcoal teal and muted concrete sage, warm amber light, same aesthetic as pixel castle bedroom and desert study. Wide distant view of a quiet room set inside a huge cavern. Left sixty percent mostly dark empty flat concrete walls, enormous negative space for desktop UI. Right third a very small solitary back-view person with tousled hair sits at a plain desk and laptop beneath a warm adjustable desk lamp, small books and an old typewriter. Study is small in frame, like a tiny human in monumental architecture. Tall rectangular opening behind desk shows elevated concrete walkways spiraling down into darkness with subtle distant warm orange light from far below. Minimalist modernist architecture, no medieval arches. A simple low pedestal with an abandoned typewriter stands near lower center. A handful of small cyan-blue ten-pointed starburst note markers float in the room, clearly spaced, NO words, symbols, letters or interface. Wooden chair and desk, subtle worn floor, scattered folded blank paper. Quiet, lonely, mysterious, thoughtful, not horror. No animals. Matte shadows, controlled amber light on right, rich depth and texture, no purple, no neon bloom. Edge-to-edge panoramic 16:9 composition.
+
+
+## TileRecall icon
+
+`dist/assets/tilerecall-mark.svg` uses the exact paths and four blue fills from `dpeterzen/apa`, `components/icons/brand-mark-icon.tsx` on `master`. The compact CSS phosphor treatment is adapted from `components/ui/phosphor-glyph.css`: bloom, red/cyan fringes, scanline grid, and a brief hover convergence. Used for the desktop shortcut, Start menu, window title, and taskbar; reduced motion disables the hover animation.
+
+TileRecall’s phosphor core makes a finite 1.8s pass through the original four blues, staggered by 90ms, then rests uniformly at brand blue `#2e62ef`. Reduced motion skips the pass. The matching APA Home-mark implementation uses its mode-aware `brand-blue` token.
+
+## Coda crosses
+
+Edited with the built-in image generation tool. Saved as `dist/assets/notes-cavern-cross.png` and `dist/assets/notes-study-cross.png`, both 1672 × 941. The original images remain alongside them. Small shaded wooden Latin crosses sit above the desks, matching the quiet treatment in Dune and Keep. Mobile framing keeps the study and its cross visible.
+
+### Cavern edit prompt
+
+Use case: precise-object-edit. Edit target: the supplied full 1672x941 Coda cavern wallpaper. Add exactly ONE extremely small slender wooden Latin cross to the warm wall inside the tiny desk alcove at the far right. Place it in a quiet place of honor above the seated person's desk, around x1510 y327, just left of the hanging lamp, on the wall; about 16-20 pixels tall and 7-9 pixels across, thin 1-2 pixel strokes. Long lower stem, short horizontal bar in upper third. Weathered dark brown wood with a very subdued amber edge and shaded side, matching the pixel art and existing light; understated and naturally mounted, not glowing. Preserve the exact entire original composition, framing and dimensions. Change only this tiny wall detail. Do not move or redraw the person, desk, lamp, architecture, stairs, blue note markers, shadows, light or color palette. No extra objects, text, border, UI, radiating light, giant or ornate cross. Full original wide wallpaper, no crop.
+
+### Study edit prompt
+
+Use case: precise-object-edit. Edit target: the supplied full 1672x941 Coda study wallpaper. Add exactly ONE small slender wooden Latin cross mounted in a quiet place of honor on the wall above the seated person's desk, around x1520 y485, to the upper right of the desk lamp head and below the blue note star at x1475 y423. About 27-32 pixels tall, 11-13 pixels across, delicate 2 pixel wood strokes. Long lower stem, short horizontal crossbar at upper third. Dark weathered brown wood with a subdued warm amber edge and shaded side, gently caught by existing lamp light; naturally integrated pixel texture, low contrast and not glowing. Preserve the exact entire original composition, framing and dimensions. Change only this tiny wall detail. Do not move or redraw the person, desk, lamp, books, typewriter, architecture, opening, blue note markers, shadows, lighting or palette. No extra objects, text, UI, border, radiating light, giant or ornate cross. Full original wide wallpaper, no crop.

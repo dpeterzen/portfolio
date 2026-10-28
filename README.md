@@ -1,75 +1,13 @@
 # Portfolio
 
-Daniel Peterson’s portfolio as a functioning retro desktop, with two lo-fi pixel-art city themes. Each begins with a city view and a tiny laptop user tucked into a distant bedroom window, then alternates with its original indoor scene:
+Daniel Peterson’s personal portfolio, built with HTML, CSS, and JavaScript. A desktop-style interface for browsing projects. No build step or dependencies.
 
-- **Dune** — a quiet desert city with an occupied bedroom window, in warm sand and brown tones.
-- **Keep** — a midnight castle city with an occupied bedroom window, in slate and blue.
-
-Static HTML, CSS, and JavaScript. No build step or production dependencies.
-
-## Run
+## Run locally
 
 ```sh
-git clone https://github.com/dpeterzen/portfolio.git
-cd portfolio
 python3 -m http.server 4173 --directory dist
 ```
 
-Open [localhost:4173](http://localhost:4173). Use `?theme=dune` or `?theme=keep` for an environment link; theme selection is remembered on the visitor’s device.
+Open [localhost:4173](http://localhost:4173).
 
-## Desktop controls
-
-- Double-click a desktop folder to open it; on touchscreens, tap once. Keyboard users can focus an icon and press Enter or Space.
-- Drag a window by its title bar. Use the bottom-right resize handle on desktop.
-- Minimize, maximize/restore, and close controls work independently for every window. Double-clicking a title bar also toggles maximize.
-- Taskbar buttons restore or minimize their window. The far-right taskbar control shows the desktop and restores the prior visible windows.
-- The Start menu opens projects, the guestbook, and Display Properties. Theme choices are also available in the top bar.
-- Project folders contain `readme.txt` for information and `preview.img` for an illustrative study.
-- Escape dismisses Start or closes the active window. Direct project links such as `?theme=keep#tilerecall` and browser Back/Forward are supported.
-
-Wallpapers alternate every 30 seconds with a five-second crossfade. The chevrons beside the theme switch move between city and indoor views with a short fade; every manual change cancels the previous deadline and starts a fresh 30-second countdown. Manual navigation also works with cycling paused or reduced motion enabled. Switching themes restarts from the city view. Turn off cycling in Display Properties to hold the current scene; the preference is saved on this device. Playback pauses in background tabs.
-
-The welcome window starts minimized on phones so the desktop folders stay visible. Phone windows fit the workspace. Reduced-motion preferences disable automatic wallpaper changes and animation; the scene arrows remain available.
-
-## Edit
-
-| File | Purpose |
-| --- | --- |
-| `dist/projects.js` | Project records and folder metadata |
-| `dist/index.html` | Desktop shell, icon sprites, Start menu, taskbar |
-| `dist/styles.css` | Both palettes, retro chrome, project illustrations, responsive layout |
-| `dist/theme.js` | Saved theme, URL preferences, and matching favicon |
-| `dist/wallpaper.js` | Wallpaper navigation, timer reset, pause preference, reduced motion |
-| `dist/window-state.js` | Independent window state and focus ordering |
-| `dist/app.js` | Window manager, drag, file views, guestbook, clock, routing |
-| `dist/assets/` | City and indoor wallpapers, plus Dune/Keep favicons |
-| `ARTWORK.md` | Built-in image-generation prompts and asset paths |
-
-Add a record to `window.PORTFOLIO_PROJECTS` to create a desktop folder, Start entry, and project window. Keep `id` unique and URL-safe for direct links. `visual` selects the `tiles` or `paintings` illustration. Add another case to `projectStudy()` and corresponding CSS for a new project visual. Set `pending: true` until the project’s website launches. Check desktop and phone layouts when extending the collection.
-
-## Check
-
-```sh
-node --check dist/app.js
-node --check dist/window-state.js
-node --check dist/theme.js
-node --check dist/projects.js
-node --check dist/wallpaper.js
-node tests/theme.test.cjs
-node tests/windows.test.cjs
-node tests/wallpaper.test.cjs
-```
-
-Theme tests cover persistence, URL precedence, unavailable storage, accessible toggle state, and environment text. Window tests cover focus stacking, taskbar behavior, minimize/maximize restoration, closed-window behavior, and showing/restoring desktop groups. Wallpaper tests cover the 30-second sequence, manual deadline reset, rapid navigation, theme changes, pause persistence, background tabs, and reduced motion. Validate pointer interactions and responsive layouts separately in a browser.
-
-## Guestbook
-
-Messages are stored only on the visitor’s device, and are not shared between visitors. Existing notes from earlier portfolio versions are retained. A shared guestbook requires a backend.
-
-## Hosting
-
-Serve `dist/` with a static host. Pushing to GitHub does not automatically deploy the hosted site. Private hosting configuration and credentials are excluded from this repository.
-
-## Content
-
-TileRecall’s description is based on its project README and remains marked in development. Both project previews are labeled as conceptual studies. The gallery study is not a reproduction of Ruthie’s paintings. The wallpaper character is a stylized representation, not a photographic likeness. Each scene includes a delicate architectural cross and tousled hair. The indoor scenes have sleeping companions: a cat in Dune and a small dragon in Keep. The cat stays out of sight in the distant Dune city view.
+Project content is in `dist/projects.js`. Serve `dist/` to deploy.
