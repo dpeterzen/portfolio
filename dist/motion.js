@@ -70,9 +70,7 @@
     if (toggle) {
       toggle.checked = enabled;
       toggle.disabled = preference.matches;
-      document.querySelector('#motion-note').textContent = preference.matches
-        ? 'Motion is off to match your device’s reduced-motion setting.'
-        : 'Gentle sky effects, background drift and text reveals.';
+      document.querySelector('#motion-note').hidden = !preference.matches;
     }
     if (root.dataset.motion === 'off') {
       document.querySelectorAll('.app-window, .lamp-glow, .coda-flight, #desk-lamp').forEach(app => {

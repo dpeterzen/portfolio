@@ -599,3 +599,12 @@ html[data-motion=off] .lamp-hint{transition:none}
 @keyframes reboot-shutter{from{transform:scaleY(.004);opacity:.5}to{transform:scaleY(1);opacity:1}}
 @keyframes reboot-console{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}
 @keyframes reboot-segment{to{opacity:.75}}
+
+/* Keep the greeting inside its status cell, with a pause at either end. */
+.status-marquee{container-type:inline-size}
+.status-marquee-track{display:block}
+.status-marquee-track>span{display:block;width:max-content;animation:status-bounce 12s ease-in-out infinite}
+.status-marquee:hover .status-marquee-track>span{animation-play-state:paused}
+@keyframes status-bounce{0%,5%,95%,100%{transform:translateX(0)}45%,55%{transform:translateX(max(0px,calc(100cqw - 100%)))}}
+.display-body .wallpaper-cycle{gap:9px;margin:12px 0 20px;font-size:11px;cursor:pointer}
+.display-body .wallpaper-cycle input{width:15px;height:15px;accent-color:var(--selection)}

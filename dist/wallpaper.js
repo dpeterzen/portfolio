@@ -4,7 +4,6 @@
   const root = document.documentElement;
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const control = document.querySelector('#wallpaper-cycle');
-  const hint = document.querySelector('#wallpaper-cycle-hint');
   const status = document.querySelector('#wallpaper-view');
   const scenes = ['city', 'room'];
   const key = 'portfolio-wallpaper-cycle-v1';
@@ -46,9 +45,6 @@
   function syncControl() {
     control.checked = enabled && !motion.matches;
     control.disabled = motion.matches;
-    hint.textContent = motion.matches
-      ? 'Automatic cycling is off with reduced motion. Use the arrows to switch views.'
-      : `${theme === 'coda' ? 'Cavern' : 'City'} first, then indoors. Your settings are saved on this device.`;
   }
 
   control.addEventListener('change', () => {
