@@ -8,7 +8,7 @@ const entries = [
   {id:'about',title:'readme.txt',icon:'paper',windowTitle:'readme.txt — Notepad'},
   ...projects.map(project=>({id:project.id,title:project.name,icon:'folder',project,windowTitle:project.name})),
   {id:'snake',title:'Snake.exe',icon:'snake',game:true,windowTitle:'Snake.exe — Pocket arcade'},
-  {id:'asteroids',title:'Asteroids',icon:'asteroids',game:true,windowTitle:'Asteroids.exe — Sector patrol'},
+  {id:'asteroids',title:'Asteroids.exe',icon:'asteroids',game:true,windowTitle:'Asteroids.exe — Sector patrol'},
   {id:'guestbook',title:'Guestbook',icon:'notebook',windowTitle:'Guestbook — Visitor log'},
   {id:'display',title:'Display',icon:'display',windowTitle:'Display Properties'},
   {id:'letter',title:'unsent.txt',icon:'paper',windowTitle:'unsent.txt — Notepad'},

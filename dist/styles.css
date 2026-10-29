@@ -633,3 +633,5 @@ html[data-motion=off] .lamp-hint{transition:none}
 .arcade:fullscreen .arcade-screen canvas{width:auto;height:100%}
 @media(pointer:coarse),(max-width:639px){.arcade-touch{display:flex}.arcade-stage{margin:8px}.arcade-toolbar{padding:8px 10px}.arcade-footer{padding:8px 10px}.arcade-overlay{padding:18px 12px}}
 @media(max-width:360px){.desktop-icons{grid-auto-columns:86px;gap:12px 6px}.desktop-icon{width:86px}.icon-label{max-width:86px}.arcade-footer{gap:4px;font-size:9px}.arcade-footer button{padding:4px}}
+.desktop-icon[data-open=asteroids] .icon-label{white-space:nowrap;font-size:11px;padding-inline:3px;max-width:none}
+@media(max-width:900px){.desktop-icon[data-open=asteroids] .icon-label{font-size:10px;padding-inline:2px}}

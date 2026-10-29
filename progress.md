@@ -8,6 +8,10 @@ Completed locally:
 - Snake: queued turns, growth, acceleration, walls/self collision, full-board win. Asteroids: inertia, shooting, splitting rocks, toroidal world with mirrored edge rendering, scores, waves, three lives, and respawn shields.
 - Added game deep links and updated browser-history minimization to include games.
 - Validation passed: tests/games.test.cjs plus existing windows/theme/wallpaper suites; JS syntax checks; git diff --check.
-- Ran the skill's Playwright client (local copy with installed Chromium executable configured); visually reviewed Snake and Asteroids gameplay captures. Supplemental browser checks passed for desktop launchers, Start, pause/resume, minimize/restore, switching apps, game over/restart, high-score persistence, fullscreen/Escape, maximize, touch controls, and 320px/390px mobile layouts. No browser errors. Screenshots and temporary scripts are in ignored tmp/game-test/.
+- Ran the skill's Playwright client (local copy with installed Chromium executable configured); visually reviewed Snake and Asteroids gameplay captures. Supplemental browser checks passed for desktop launchers, Start, pause/resume, minimize/restore, switching apps, game over/restart, high-score persistence, fullscreen/Escape, maximize, touch controls, and 320px/390px mobile layouts. No browser errors. Temporary test scripts and screenshots were removed during final cleanup.
 
 Status: Local implementation and verification complete. Publication is separate from the requested Git commit.
+
+Follow-up: Restored the full Asteroids.exe desktop label with no wrapping and a slightly smaller font/padding. Browser layout checks at 1440, 900, 390, and 320px confirm it fits within its icon on one line; visually checked the narrow layout. Updated app/CSS cache versions.
+
+Cleanup: Stopped the local preview server and removed the task’s temporary browser-test files.
