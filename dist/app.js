@@ -12,7 +12,7 @@ const entries = [
   {id:'guestbook',title:'Guestbook',icon:'notebook',windowTitle:'Guestbook — Visitor log'},
   {id:'display',title:'Display',icon:'display',windowTitle:'Display Properties'},
   {id:'letter',title:'unsent.txt',launcher:false,icon:'paper',windowTitle:'unsent.txt — Notepad'},
-  {id:'notes',title:'found.txt',launcher:false,icon:'paper',windowTitle:'found.txt — Notes'},
+  {id:'notes',title:'The Beginner’s Guide.exe',launcher:false,icon:'paper',windowTitle:'The Beginner’s Guide.exe — Notes'},
   {id:'terminal',title:'terminal.exe',startTitle:'Run…',desktop:false,icon:'computer',windowTitle:'terminal.exe — Night shift'}
 ];
 const model = new window.DesktopState(entries.map(entry=>entry.id));

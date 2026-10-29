@@ -206,7 +206,11 @@
       window.PortfolioTheme.unlockCoda({x:rect.x,y:rect.y,width:rect.width,height:rect.height});
       document.querySelector('#desktop-status').textContent = 'Coda discovered. Click the blue notes.';
     }
-    document.querySelector('#coda-launcher').addEventListener('click', event => { enterCoda(event); open('notes'); });
+    // The launcher stays on the Coda desktop as the way back into the notes; only the first click travels.
+    document.querySelector('#coda-launcher').addEventListener('click', event => {
+      if (currentTheme() !== 'coda') enterCoda(event);
+      open('notes');
+    });
     function run(raw) {
       const {name,args} = parseCommand(raw);
       if (!name) return;
