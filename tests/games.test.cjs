@@ -1,0 +1,23 @@
+const assert = require('node:assert/strict');
+const {Snake, Asteroids} = require('../dist/games-engine.js');
+const snake = new Snake(()=>0);
+assert.equal(snake.mode,'ready');
+snake.update(10);assert.equal(snake.body[0].x,8,'start screen stays still');
+snake.reset();snake.turn('left');assert.equal(snake.queue.length,0,'cannot reverse');
+snake.update(1.02);assert.equal(snake.score,10);assert.equal(snake.body.length,5);assert.ok(!snake.body.some(p=>p.x===snake.food.x&&p.y===snake.food.y));
+snake.turn('up');snake.turn('left');snake.update(.14);assert.deepEqual(snake.direction,{x:0,y:-1});snake.update(.14);assert.deepEqual(snake.direction,{x:-1,y:0});
+snake.mode='paused';const before=JSON.stringify(snake.snapshot());snake.update(8);assert.equal(JSON.stringify(snake.snapshot()),before);
+snake.reset();snake.update(10);assert.equal(snake.mode,'over','wall collision ends game');snake.reset();assert.equal(snake.score,0);
+snake.body=[{x:5,y:5},{x:5,y:6},{x:6,y:6},{x:6,y:5},{x:7,y:5}];snake.direction={x:1,y:0};snake.update(.15);assert.equal(snake.mode,'over','self collision ends game');
+snake.reset();snake.body=[{x:5,y:5},{x:5,y:6},{x:6,y:6},{x:6,y:5}];snake.direction={x:1,y:0};snake.update(.15);assert.equal(snake.mode,'running','moving into vacating tail is legal');
+const ast = new Asteroids(()=>.5);ast.reset();
+assert.equal(ast.lives,3);assert.equal(ast.rocks.length,4);
+ast.update(.1,{up:true,right:true,fire:true});assert.ok(ast.ship.vx||ast.ship.vy);assert.notEqual(ast.ship.angle,-Math.PI/2);assert.equal(ast.bullets.length,1);
+ast.ship.x=639;ast.ship.vx=100;ast.update(.1);assert.ok(ast.ship.x<20,'ship wraps around screen');
+ast.rocks=[{...ast.rock(100,100,3),vx:0,vy:0}];ast.bullets=[{x:100,y:100,vx:0,vy:0,life:1}];ast.update(1/60);assert.equal(ast.score,20);assert.equal(ast.rocks.length,2);assert.ok(ast.rocks.every(r=>r.size===2));
+ast.rocks=[{...ast.rock(100,100,1),vx:0,vy:0}];ast.bullets=[{x:100,y:100,vx:0,vy:0,life:1}];ast.update(1/60);assert.equal(ast.wave,2);assert.equal(ast.score,120);assert.equal(ast.rocks.length,5,'clearing the field starts next wave');
+for(let n=2;n>=0;n--){ast.ship.shield=0;ast.rocks=[{...ast.rock(ast.ship.x,ast.ship.y,1),vx:0,vy:0}];ast.update(1/60);assert.equal(ast.lives,n);}
+assert.equal(ast.mode,'over');ast.reset();assert.equal(ast.lives,3);assert.equal(ast.score,0);assert.equal(ast.wave,1);
+ast.rocks=[{...ast.rock(ast.ship.x,ast.ship.y,1),vx:0,vy:0}];ast.update(1/60);assert.equal(ast.lives,3,'respawn shield protects ship');
+ast.mode='paused';const ship={...ast.ship};ast.update(10,{up:true,fire:true});assert.deepEqual(ast.ship,ship);
+console.log('PASS: snake eating, growth, turn queue, reversal, wall/self collisions, tail movement, pause/reset; asteroid motion, wrapping, shooting, splitting, scoring, waves, lives, shield and reset.');

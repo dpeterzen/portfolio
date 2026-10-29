@@ -604,3 +604,32 @@ html[data-motion=off] .lamp-hint{transition:none}
 #status-greeting-text{display:inline-block;min-height:14px;line-height:14px;white-space:pre;font-family:var(--mono)}
 .display-body .wallpaper-cycle{gap:9px;margin:12px 0 20px;font-size:11px;cursor:pointer}
 .display-body .wallpaper-cycle input{width:15px;height:15px;accent-color:var(--selection)}
+
+/* The pocket arcade uses the same window chrome as the rest of the desktop. */
+.arcade{--arcade-ink:#cce7a9;display:flex;flex-direction:column;flex:1;min-height:0;background:#101e17;color:var(--arcade-ink);font:11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}
+.arcade-asteroids{--arcade-ink:#b8e6e3;background:#081923}
+.game-window{min-width:320px;min-height:360px}
+.game-window .window-content{overflow:hidden}
+.arcade-toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid #90b28c40;letter-spacing:.04em}
+.arcade-label{font-size:9px;opacity:.6;width:100%}
+.arcade-stage{position:relative;flex:1;min-height:0;margin:12px;display:grid;place-items:center;overflow:hidden}
+.arcade-screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.arcade-screen canvas{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;image-rendering:pixelated}
+.arcade-overlay{position:relative;text-align:center;background:#0c1c18ed;border:1px solid #96bd8560;box-shadow:0 8px 30px #0005;padding:24px 18px;max-width:94%;max-height:100%;overflow:auto;z-index:1}
+.arcade-asteroids .arcade-overlay{background:#0a1b26f2;border-color:#92cfce60}
+.arcade-eyebrow{font-size:9px;letter-spacing:.18em;opacity:.7}
+.arcade-overlay h2{font:700 clamp(25px,4vw,38px)/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;margin:12px 0;color:var(--arcade-ink)}
+.arcade-overlay p{margin:10px 0 18px}
+.arcade .raised{font-family:inherit;font-size:11px;color:var(--ink)}
+.arcade .arcade-play{padding:9px 24px}
+.arcade-overlay .arcade-instructions{font-size:10px;line-height:1.9;opacity:.7;margin:18px 0 0}
+.arcade-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-top:1px solid #90b28c40;font-size:10px}
+.arcade-footer>div{display:flex;gap:5px}
+.arcade-footer button{padding:4px 7px}
+.arcade-touch{display:none;gap:8px;padding:0 12px 12px;justify-content:center}
+.arcade-touch button{min-width:48px;min-height:44px;flex:1;touch-action:none;user-select:none;-webkit-user-select:none;font-size:20px!important}
+.arcade-touch .arcade-fire{font-size:12px!important}
+.arcade:fullscreen{padding:16px;width:100%;height:100%;box-sizing:border-box}
+.arcade:fullscreen .arcade-screen canvas{width:auto;height:100%}
+@media(pointer:coarse),(max-width:639px){.arcade-touch{display:flex}.arcade-stage{margin:8px}.arcade-toolbar{padding:8px 10px}.arcade-footer{padding:8px 10px}.arcade-overlay{padding:18px 12px}}
+@media(max-width:360px){.desktop-icons{grid-auto-columns:86px;gap:12px 6px}.desktop-icon{width:86px}.icon-label{max-width:86px}.arcade-footer{gap:4px;font-size:9px}.arcade-footer button{padding:4px}}

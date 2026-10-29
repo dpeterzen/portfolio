@@ -7,6 +7,8 @@ const taskButtons = document.querySelector('#task-buttons');
 const entries = [
   {id:'about',title:'readme.txt',icon:'paper',windowTitle:'readme.txt — Notepad'},
   ...projects.map(project=>({id:project.id,title:project.name,icon:'folder',project,windowTitle:project.name})),
+  {id:'snake',title:'Snake.exe',icon:'snake',game:true,windowTitle:'Snake.exe — Pocket arcade'},
+  {id:'asteroids',title:'Asteroids',icon:'asteroids',game:true,windowTitle:'Asteroids.exe — Sector patrol'},
   {id:'guestbook',title:'Guestbook',icon:'notebook',windowTitle:'Guestbook — Visitor log'},
   {id:'display',title:'Display',icon:'display',windowTitle:'Display Properties'},
   {id:'letter',title:'unsent.txt',icon:'paper',windowTitle:'unsent.txt — Notepad'},
@@ -84,9 +86,10 @@ function makeWindow(entry,index) {
   const app = document.createElement('section'); app.className=`app-window ${entry.project?'project-window':`${entry.id}-window`}`; app.id=`window-${entry.id}`; app.hidden=true;
   app.setAttribute('role','dialog'); app.setAttribute('aria-labelledby',`title-${entry.id}`); app.setAttribute('aria-modal','false'); app.tabIndex=-1;
   const title=`<header class="window-titlebar"><span class="window-title">${entryIcon(entry)}<span id="title-${entry.id}">${entry.windowTitle}</span></span><div class="window-controls"><button type="button" data-control="minimize" aria-label="Minimize ${entry.title}" title="Minimize"><span class="control-min" aria-hidden="true"></span></button><button type="button" data-control="maximize" aria-label="Maximize ${entry.title}" title="Maximize"><span class="control-max" aria-hidden="true"></span></button><button type="button" data-control="close" aria-label="Close ${entry.title}" title="Close"><span class="control-close" aria-hidden="true">×</span></button></div></header>`;
-  app.innerHTML=title+`<div class="window-content">${entry.project?projectContent(entry.project):entry.id==='about'?aboutContent():entry.id==='guestbook'?guestbookContent():entry.id==='terminal'?window.PortfolioSecrets.terminalContent():entry.id==='letter'?window.PortfolioSecrets.letterContent():entry.id==='notes'?window.PortfolioSecrets.notesContent():displayContent()}</div><span class="resize-grip" aria-hidden="true"></span>`;
-  const width=entry.id==='notes'?570:entry.id==='terminal'?580:entry.id==='letter'?510:entry.project?740:entry.id==='about'?450:entry.id==='guestbook'?440:490;
-  const height=entry.id==='notes'?590:entry.id==='terminal'?410:entry.id==='letter'?480:entry.project?490:entry.id==='about'?400:entry.id==='guestbook'?540:510;
+  app.innerHTML=title+`<div class="window-content">${entry.game?window.PortfolioArcade.content(entry.id):entry.project?projectContent(entry.project):entry.id==='about'?aboutContent():entry.id==='guestbook'?guestbookContent():entry.id==='terminal'?window.PortfolioSecrets.terminalContent():entry.id==='letter'?window.PortfolioSecrets.letterContent():entry.id==='notes'?window.PortfolioSecrets.notesContent():displayContent()}</div><span class="resize-grip" aria-hidden="true"></span>`;
+  if(entry.game) app.classList.add('game-window');
+  const width=entry.game?(entry.id==='snake'?530:650):entry.id==='notes'?570:entry.id==='terminal'?580:entry.id==='letter'?510:entry.project?740:entry.id==='about'?450:entry.id==='guestbook'?440:490;
+  const height=entry.game?650:entry.id==='notes'?590:entry.id==='terminal'?410:entry.id==='letter'?480:entry.project?490:entry.id==='about'?400:entry.id==='guestbook'?540:510;
   const area=workspace.getBoundingClientRect();
   app.style.width=`${Math.min(width,area.width-24)}px`; app.style.height=`${Math.min(height,area.height-28)}px`;
   app.style.left=`${Math.max(8,Math.min(235+index*22,area.width-Math.min(width,area.width-24)-16))}px`;
@@ -147,11 +150,12 @@ function renderWindows() {
   const desktopControl=document.querySelector('#show-desktop');
   const desktopAction=model.hiddenSet.length?'Restore windows':'Show desktop';
   desktopControl.setAttribute('aria-label',desktopAction);desktopControl.title=desktopAction;
+  window.PortfolioArcade.sync(model.active);
 }
 function openWindow(id,route=false) {
   if(id === 'notes' && document.documentElement.dataset.codaUnlocked !== 'true') return;
   model.open(id);renderWindows();const app=elements.get(id);app.focus({preventScroll:true});
-  if(route&&projects.some(project=>project.id===id)&&location.hash!==`#${id}`)history.pushState(null,'',`#${id}`);
+  if(route&&entries.some(entry=>entry.id===id&&(entry.project||entry.game))&&location.hash!==`#${id}`)history.pushState(null,'',`#${id}`);
   document.querySelector('#desktop-status').textContent=`${entries.find(entry=>entry.id===id).title} opened`;
   document.dispatchEvent(new CustomEvent('portfolio:window-open',{detail:{id}}));
 }
@@ -162,16 +166,16 @@ function controlWindow(id,action) {
   if(action!=='maximize'){if(model.active)elements.get(model.active).focus({preventScroll:true});else (launchers.get(id)?.closest('#start-menu')?startButton:launchers.get(id))?.focus({preventScroll:true});}
 }
 function syncRoute() {
-  const project=projects.find(project=>location.hash===`#${project.id}`);
+  const project=entries.find(entry=>(entry.project||entry.game)&&location.hash===`#${entry.id}`);
   if(project)openWindow(project.id);
-  else {for(const item of projects)if(model.get(item.id).open)model.minimize(item.id);renderWindows();}
+  else {for(const item of entries.filter(entry=>entry.project||entry.game))if(model.get(item.id).open)model.minimize(item.id);renderWindows();}
 }
 window.addEventListener('popstate',syncRoute);window.addEventListener('hashchange',syncRoute);
 const startButton=document.querySelector('#start-button');const startMenu=document.querySelector('#start-menu');
 function closeStart(){startMenu.hidden=true;startButton.setAttribute('aria-expanded','false');}
 startButton.addEventListener('click',()=>{startMenu.hidden=!startMenu.hidden;startButton.setAttribute('aria-expanded',String(!startMenu.hidden));});
 document.addEventListener('pointerdown',event=>{if(!startMenu.contains(event.target)&&!startButton.contains(event.target))closeStart();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){if(!startMenu.hidden){closeStart();startButton.focus();}else if(model.active)controlWindow(model.active,'close');}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!event.defaultPrevented){if(!startMenu.hidden){closeStart();startButton.focus();}else if(model.active)controlWindow(model.active,'close');}});
 document.querySelector('#show-desktop').addEventListener('click',()=>{model.desktop();renderWindows();});
 document.querySelectorAll('[data-launch]').forEach(button=>button.addEventListener('click',()=>openWindow(button.dataset.launch)));
 document.querySelector('#explore-projects').addEventListener('click',()=>{controlWindow('about','minimize');const first=launchers.get(projects[0]?.id);if(first){selectIcon(first);first.focus({preventScroll:true});}});
@@ -199,7 +203,7 @@ message.addEventListener('input',()=>{document.querySelector('#character-count')
 document.querySelector('#note-form').addEventListener('submit',event=>{event.preventDefault();const name=document.querySelector('#note-name').value.trim();const text=message.value.trim();const error=document.querySelector('#form-error');document.querySelector('#note-status').textContent='';if(!name||!text){error.hidden=false;error.textContent='Enter a name and message.';return;}const next=[{name:name.slice(0,32),message:text.slice(0,280)},...notes].slice(0,30);try{localStorage.setItem(storageKey,JSON.stringify(next));}catch{error.hidden=false;error.textContent='Couldn’t save. Browser storage is unavailable.';return;}notes=next;renderNotes();event.target.reset();error.hidden=true;document.querySelector('#character-count').textContent='0 / 280';document.querySelector('#note-status').textContent='Saved on this device.';});
 function updateClock(){const now=new Date();const clock=document.querySelector('#clock');clock.textContent=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});clock.dateTime=now.toISOString();clock.title=now.toLocaleDateString([],{dateStyle:'full'});}
 updateClock();setInterval(updateClock,30000);
-if(projects.some(project=>location.hash===`#${project.id}`))syncRoute();else{openWindow('about');if(window.innerWidth<640){model.minimize('about');renderWindows();}}
+if(entries.some(entry=>(entry.project||entry.game)&&location.hash===`#${entry.id}`))syncRoute();else{openWindow('about');if(window.innerWidth<640){model.minimize('about');renderWindows();}}
 
 window.PortfolioSecrets.init({open:openWindow,close:id=>controlWindow(id,'close'),projectList:projects});
 
