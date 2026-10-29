@@ -551,11 +551,17 @@ html:not([data-coda-unlocked=true]) .wallpaper-options{grid-template-columns:rep
 
 /* Scene hints fade after discovery; hover and keyboard focus bring them back. */
 .lamp-hint{transition:opacity 1.6s cubic-bezier(.4,0,.2,1)}
-#desk-lamp[data-hint=visible] .lamp-hint,#desk-lamp:hover .lamp-hint,#desk-lamp:focus-visible .lamp-hint{opacity:.9;pointer-events:auto;transition-duration:.25s}
+#desk-lamp[data-hint=visible] .lamp-hint,#desk-lamp[data-near] .lamp-hint,#desk-lamp:hover .lamp-hint,#desk-lamp:focus-visible .lamp-hint{opacity:.9;pointer-events:auto;transition-duration:.25s}
 [data-wallpaper-scene=city] #desk-lamp{left:72.75%;top:61.8%;width:4.2%;height:7.5%}
 [data-theme=keep][data-wallpaper-scene=city] #desk-lamp{left:72.7%;top:49.8%}
 [data-theme=coda][data-wallpaper-scene=city] #desk-lamp{left:91.6%;top:42.5%}
 html[data-motion=off] .lamp-hint{transition:none}
+/* Border beam: a bright arc that travels once around the circle; secrets.js sets data-beam. */
+@property --beam-turn{syntax:'<angle>';inherits:false;initial-value:0deg}
+#desk-lamp::after{content:'';position:absolute;inset:-2px;border-radius:50%;padding:2px;background:conic-gradient(from var(--beam-turn),transparent 0 68%,#f4d29540 80%,#ffe7b0 92%,#fff8e6 95%,transparent 97%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:0;pointer-events:none}
+#desk-lamp[data-beam]::after{animation:lamp-beam 1.9s cubic-bezier(.45,.05,.35,1) both}
+@keyframes lamp-beam{0%{--beam-turn:0deg;opacity:0}12%,82%{opacity:1}100%{--beam-turn:360deg;opacity:0}}
+html[data-motion=off] #desk-lamp::after{display:none}
 /* Empty space between desktop icons must not cover scenery controls. */
 .desktop-icons{pointer-events:none}
 .desktop-icons>.desktop-icon{pointer-events:auto}

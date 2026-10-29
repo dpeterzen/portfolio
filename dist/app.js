@@ -11,8 +11,8 @@ const entries = [
   {id:'asteroids',title:'Asteroids.exe',icon:'asteroids',game:true,windowTitle:'Asteroids.exe — Sector patrol'},
   {id:'guestbook',title:'Guestbook',icon:'notebook',windowTitle:'Guestbook — Visitor log'},
   {id:'display',title:'Display',icon:'display',windowTitle:'Display Properties'},
-  {id:'letter',title:'unsent.txt',icon:'paper',windowTitle:'unsent.txt — Notepad'},
-  {id:'notes',title:'found.txt',icon:'paper',windowTitle:'found.txt — Notes'},
+  {id:'letter',title:'unsent.txt',launcher:false,icon:'paper',windowTitle:'unsent.txt — Notepad'},
+  {id:'notes',title:'found.txt',launcher:false,icon:'paper',windowTitle:'found.txt — Notes'},
   {id:'terminal',title:'terminal.exe',startTitle:'Run…',desktop:false,icon:'computer',windowTitle:'terminal.exe — Night shift'}
 ];
 const model = new window.DesktopState(entries.map(entry=>entry.id));
@@ -49,6 +49,8 @@ function selectIcon(button) {
   icons.querySelectorAll('.desktop-icon').forEach(icon=>icon.classList.toggle('selected',icon===button));
 }
 function launchIcon(entry) {
+  // Windows reached only from the scene or the terminal: no desktop icon, no Start entry.
+  if (entry.launcher === false) return;
   if (entry.desktop !== false) {
   const button = document.createElement('button'); button.type='button'; button.className=`desktop-icon ${entry.project?.visual || ''}`;
   button.dataset.open=entry.id; button.setAttribute('aria-label',`Open ${entry.title}${entry.project?' project folder':''}`);

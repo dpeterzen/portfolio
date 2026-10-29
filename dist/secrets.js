@@ -12,7 +12,7 @@
       'I do not think unfinished things are lost. Sometimes they are only waiting for someone to open the right window.',
       'The lamp is on. Send the sentence. Bring the small machine. There is room here for whatever you make next.'
     ],signature:'— the room beneath the bells'},
-    coda: {number:'',subject:'No return address',paragraphs:['No correspondence here. Look for the blue notes, or open found.txt.'],signature:'— loose pages'}
+    coda: {number:'',subject:'No return address',paragraphs:['No correspondence here. Look for the blue notes.'],signature:'— loose pages'}
   };
   // Ten scenery markers reveal random notes from the curated collection.
   const noteSpots = [
@@ -73,8 +73,11 @@
       const revealDelay = animateReveal ? (automatic ? 1250 : 260) : 0;
       if (sceneChanged) {
         lampScene = scene; clearTimeout(lampHintTimer);
-        lampButton.dataset.hint = 'visible';
-        lampHintTimer = setTimeout(() => { delete lampButton.dataset.hint; },4500 + revealDelay);
+        // A mouse finds the hint by coming near the circle; touch has no hover, so it still flashes once per scene.
+        if (!finePointer.matches) {
+          lampButton.dataset.hint = 'visible';
+          lampHintTimer = setTimeout(() => { delete lampButton.dataset.hint; },4500 + revealDelay);
+        }
       }
       lampButton.hidden = false;
       if (indoors) lampButton.setAttribute('aria-pressed', String(lamp[currentTheme()]));
@@ -102,7 +105,34 @@
         );
       }
       if (lampButton.hidden && document.activeElement === lampButton) document.querySelector('#start-button').focus({preventScroll:true});
+      syncHintReach();
     }
+    const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+    // Distance from the circle's edge, in px, at which its hint appears.
+    const HINT_REACH = 90;
+    let pointer = null, pointerFrame = 0;
+    function syncHintReach() {
+      pointerFrame = 0;
+      if (!pointer || lampButton.hidden) { delete lampButton.dataset.near; return; }
+      const r = lampButton.getBoundingClientRect();
+      const dx = Math.max(r.left - pointer.x, 0, pointer.x - r.right), dy = Math.max(r.top - pointer.y, 0, pointer.y - r.bottom);
+      if (Math.hypot(dx,dy) <= HINT_REACH) lampButton.dataset.near = ''; else delete lampButton.dataset.near;
+    }
+    document.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'mouse') return;
+      pointer = {x:event.clientX,y:event.clientY};
+      pointerFrame ||= requestAnimationFrame(syncHintReach);
+    }, {passive:true});
+    document.documentElement.addEventListener('mouseleave', () => { pointer = null; syncHintReach(); });
+    // The border beam runs once as the desktop settles, then on a slow repeat, so the circle reads as
+    // something to click without moving all the time.
+    const BEAM_FIRST = 1600, BEAM_EVERY = 24000;
+    function runBeam() {
+      if (lampButton.hidden || document.hidden || root.dataset.motion === 'off' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      delete lampButton.dataset.beam; void lampButton.offsetWidth; lampButton.dataset.beam = '';
+    }
+    lampButton.addEventListener('animationend', event => { if (event.pseudoElement === '::after') delete lampButton.dataset.beam; });
+    setTimeout(() => { runBeam(); setInterval(runBeam, BEAM_EVERY); }, BEAM_FIRST);
     function toggleLamp() {
       if (root.dataset.wallpaperScene !== 'room') return false;
       lamp[currentTheme()] = !lamp[currentTheme()];
@@ -174,9 +204,9 @@
     function enterCoda(event) {
       const rect = (event?.currentTarget || input).getBoundingClientRect();
       window.PortfolioTheme.unlockCoda({x:rect.x,y:rect.y,width:rect.width,height:rect.height});
-      document.querySelector('#desktop-status').textContent = 'Coda discovered. Click the blue notes, or open found.txt.';
+      document.querySelector('#desktop-status').textContent = 'Coda discovered. Click the blue notes.';
     }
-    document.querySelector('#coda-launcher').addEventListener('click', enterCoda);
+    document.querySelector('#coda-launcher').addEventListener('click', event => { enterCoda(event); open('notes'); });
     function run(raw) {
       const {name,args} = parseCommand(raw);
       if (!name) return;
@@ -191,7 +221,7 @@
           break;
         }
         case 'coda':
-        case 'coda.exe': enterCoda(); print('Coda is now in your theme list. Click the blue notes, or open found.txt.'); break;
+        case 'coda.exe': enterCoda(); print('Coda is now in your theme list. Click the blue notes.'); break;
         case 'notes':
           if (root.dataset.codaUnlocked === 'true') open('notes');
           else print('Type coda to unlock the notes.');
