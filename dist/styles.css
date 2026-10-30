@@ -593,7 +593,7 @@ html[data-motion=off] #desk-lamp::after{display:none}
 @keyframes brand-blue-arrive{0%,100%{fill:#2e62ef}20%{fill:#3f5bc7}42%{fill:#5f7fe0}60%{fill:#8fb0ff}78%{fill:#6d8ff4}}
 @keyframes brand-blue-signal{0%,100%{fill:#2e62ef}20%{fill:#3f5bc7}42%{fill:#5f7fe0}60%{fill:#8fb0ff}78%{fill:#6d8ff4}}
 
-@media(max-width:639px){[data-theme=coda] #desk-lamp{min-width:52px;min-height:52px;border-color:#f4d295b3;box-shadow:0 0 0 3px #171e1860,0 0 14px #ffdb9b25}}
+@media(max-width:639px){[data-theme=coda] #desk-lamp{min-width:52px;min-height:52px;border-color:#f4d295b3;box-shadow:0 0 14px #ffdb9b25}}
 
 /* A quiet CRT shutter and a short segmented boot indicator. */
 .reboot-screen{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;outline:0;color:var(--desktop-ink);font:12px/1.5 var(--mono)}
