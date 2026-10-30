@@ -85,7 +85,8 @@
       const label = indoors ? `Turn desk lamp ${lamp[currentTheme()] ? 'off' : 'on'}` : 'Enter the room';
       lampButton.setAttribute('aria-label',label); lampButton.title = label;
       const hint = lampButton.querySelector('.lamp-hint');
-      hint.textContent = indoors ? 'click lamp' : 'click window · enter';
+      const action = finePointer.matches ? 'click' : 'tap';
+      hint.textContent = indoors ? `${action} lamp` : `${action} window · enter`;
       hint.style.setProperty('--hint-shift','0px');
       const bounds = document.querySelector('#workspace').getBoundingClientRect();
       const hit = lampButton.getBoundingClientRect();
@@ -256,6 +257,8 @@
       input.value = historyIndex === history.length ? draft : history[historyIndex];
     });
     window.addEventListener('resize',syncLamp);
+    // Browser chrome can resize the visible wallpaper without a window resize.
+    new ResizeObserver(syncLamp).observe(document.querySelector('#scene-interactions'));
     lampButton.addEventListener('click', () => {
       if (root.dataset.wallpaperScene === 'room') toggleLamp();
       else {

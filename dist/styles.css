@@ -435,11 +435,13 @@ html[data-motion=off] .sky-canvas{display:none}
 .letter-signature{color:var(--muted);font-size:11px}
 .letter-clue{border-top:1px dashed var(--chrome-mid);padding-top:18px;color:var(--muted);font-size:10px;margin-top:25px}
 .desktop-icon[data-open=letter] .icon-art{opacity:.78}
-.artwork-plane{position:absolute;top:0;left:var(--scene-position,70%);width:max(100%,calc((100vh - 34px)*1.7768331562));aspect-ratio:1672/941;transform:translateX(calc(-1 * var(--scene-position,70%)));pointer-events:none}
+.artwork-plane{position:absolute;top:0;left:var(--scene-position,70%);width:max(100%,calc(100cqh * 1.7768331562));aspect-ratio:1672/941;transform:translateX(calc(-1 * var(--scene-position,70%)));pointer-events:none}
 .room-light{opacity:0;transition:opacity 1s cubic-bezier(.22,1,.36,1);background:radial-gradient(ellipse at 73.2% 64.3%,transparent 0 .7%,#17100b35 2.7%,#17100b85 12%,#17100b9c 65%)}
 .keep-room .room-light{background:radial-gradient(ellipse at 78% 64%,transparent 0 .7%,#02071830 2.7%,#02071880 12%,#02071899 65%)}
 [data-lamp-dune=off] .dune-room .room-light,[data-lamp-keep=off] .keep-room .room-light{opacity:1}
-#scene-interactions{position:absolute;inset:0;overflow:clip;pointer-events:none;z-index:0}
+/* Match the fixed wallpaper, including the area behind the taskbar. Container
+   units track the visible viewport when mobile browser chrome expands. */
+#scene-interactions{position:absolute;inset:0 0 -47px;container-type:size;overflow:clip;pointer-events:none;z-index:0}
 #desk-lamp{position:absolute;left:71.1%;top:59.2%;transform:translate(-50%,-50%);width:4.2%;height:8%;min-width:44px;min-height:44px;border:0;background:transparent;pointer-events:auto;border-radius:50%;color:var(--desktop-ink)}
 [data-theme=keep] #desk-lamp{left:75.5%;top:60.3%}
 #desk-lamp:hover,#desk-lamp:focus-visible{background:radial-gradient(ellipse,#ffe1a515,transparent 70%)}
@@ -448,8 +450,7 @@ html[data-motion=off] .sky-canvas{display:none}
 #desk-lamp:hover .lamp-hint,#desk-lamp:focus-visible .lamp-hint{opacity:1}
 html[data-motion=off] .room-light{transition:none}
 @media(max-width:639px){
-  .artwork-plane{width:max(100%,calc((100vh - 33px)*1.7768331562))}
-  #scene-interactions{--scene-position:80%}
+  #scene-interactions{bottom:-48px;--scene-position:80%}
   [data-theme=keep][data-wallpaper-scene=room] #scene-interactions{--scene-position:85%}
   .letter-paper{padding:23px 20px}
   .terminal-screen{padding:17px 14px;font-size:12px}
@@ -514,7 +515,7 @@ html:not([data-coda-unlocked=true]) .wallpaper-options{grid-template-columns:rep
   .os-name>span:not(.topbar-divider){grid-column:2}
   .os-name .owner-name{display:block;width:auto;padding-left:0;font-size:9px;line-height:11px;white-space:nowrap;opacity:.75}
   .os-name .topbar-divider{display:none}
-  .coda-launcher{left:77%;top:57%}
+  .coda-launcher{left:auto;right:12px;top:18px;transform:none}
 }
 
 .restart-desktop{border-top:1px solid var(--chrome-mid);margin-top:5px}
