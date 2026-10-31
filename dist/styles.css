@@ -3,6 +3,13 @@
 
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden}
+/* The desktop is drawn in fixed px, so a 4K screen at 100% OS scaling shrinks it to a corner. Scale the
+   whole UI on very large viewports; JS that mixes screen coordinates with CSS px divides by --ui-zoom. */
+html{--ui-zoom:1;zoom:var(--ui-zoom)}
+@media(min-width:2400px) and (min-height:1250px){html{--ui-zoom:1.25}}
+@media(min-width:2880px) and (min-height:1500px){html{--ui-zoom:1.5}}
+@media(min-width:3200px) and (min-height:1650px){html{--ui-zoom:1.75}}
+@media(min-width:3600px) and (min-height:1850px){html{--ui-zoom:2}}
 body{background:var(--wall);font:12px var(--ui);color:var(--ink)}
 button,input,textarea{font:inherit;color:inherit}
 button,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
@@ -402,7 +409,7 @@ html[data-motion-paused=true] *,html[data-motion-paused=true] *:after{animation-
 
 /* Match background-size: cover and its horizontal crop, so stars stay in sky. */
 .wallpaper-scene{overflow:hidden}
-.sky-canvas{position:absolute;top:0;left:var(--scene-position,70%);width:max(100%,calc((100vh - 34px)*1.777));aspect-ratio:1672/941;transform:translateX(calc(-1 * var(--scene-position,70%)));pointer-events:none;opacity:1;transition:opacity 2s ease}
+.sky-canvas{position:absolute;top:0;left:var(--scene-position,70%);width:max(100%,calc((100vh / var(--ui-zoom) - 34px)*1.777));aspect-ratio:1672/941;transform:translateX(calc(-1 * var(--scene-position,70%)));pointer-events:none;opacity:1;transition:opacity 2s ease}
 .sky-stars{position:absolute;inset:0}
 .sky-stars i{position:absolute;width:3px;height:3px;background:var(--mote);opacity:.25;animation:star-twinkle var(--twinkle-duration) var(--twinkle-delay) ease-in-out infinite}
 .sky-stars i:after{content:'';position:absolute;inset:-2px;background:var(--mote);clip-path:polygon(40% 0,60% 0,60% 40%,100% 40%,100% 60%,60% 60%,60% 100%,40% 100%,40% 60%,0 60%,0 40%,40% 40%);opacity:.45}
@@ -410,7 +417,7 @@ html[data-motion-paused=true] *,html[data-motion-paused=true] *:after{animation-
 .shooting-star:after{content:'';position:absolute;right:0;top:-1px;width:3px;height:3px;background:var(--mote)}
 .shooting-star.second{left:49%;top:3%;width:4%;animation-duration:37s;animation-delay:15s}
 @keyframes star-twinkle{0%,36%,68%,100%{opacity:.18}49%{opacity:.9}56%{opacity:.4}}
-@keyframes shooting-star{0%{opacity:0;transform:translate(0,0) rotate(18deg)}1%{opacity:.8}5%{opacity:0;transform:translate(15vw,4.8vw) rotate(18deg)}100%{opacity:0;transform:translate(15vw,4.8vw) rotate(18deg)}}
+@keyframes shooting-star{0%{opacity:0;transform:translate(0,0) rotate(18deg)}1%{opacity:.8}5%{opacity:0;transform:translate(calc(15vw / var(--ui-zoom)),calc(4.8vw / var(--ui-zoom))) rotate(18deg)}100%{opacity:0;transform:translate(calc(15vw / var(--ui-zoom)),calc(4.8vw / var(--ui-zoom))) rotate(18deg)}}
 [data-wallpaper-scene=room] .sky-canvas{opacity:0}
 [data-wallpaper-scene=room] .sky-canvas *{animation-play-state:paused}
 [data-wallpaper-transition=manual] .sky-canvas{transition-duration:.3s}

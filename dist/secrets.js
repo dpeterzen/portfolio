@@ -94,7 +94,7 @@
       if (!lampButton.hidden) {
         const hintBounds = hint.getBoundingClientRect();
         const shift = Math.max(bounds.left + 8 - hintBounds.left, Math.min(0,bounds.right - 8 - hintBounds.right));
-        hint.style.setProperty('--hint-shift',`${shift}px`);
+        hint.style.setProperty('--hint-shift',`${shift / window.PortfolioZoom()}px`);
       }
       if (sceneChanged) {
         lampReveal?.cancel();
@@ -117,7 +117,7 @@
       if (!pointer || lampButton.hidden) { delete lampButton.dataset.near; return; }
       const r = lampButton.getBoundingClientRect();
       const dx = Math.max(r.left - pointer.x, 0, pointer.x - r.right), dy = Math.max(r.top - pointer.y, 0, pointer.y - r.bottom);
-      if (Math.hypot(dx,dy) <= HINT_REACH) lampButton.dataset.near = ''; else delete lampButton.dataset.near;
+      if (Math.hypot(dx,dy) <= HINT_REACH * window.PortfolioZoom()) lampButton.dataset.near = ''; else delete lampButton.dataset.near;
     }
     document.addEventListener('pointermove', event => {
       if (event.pointerType !== 'mouse') return;

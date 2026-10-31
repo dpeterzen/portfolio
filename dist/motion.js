@@ -28,8 +28,10 @@
     const destination = document.querySelector('.desktop-topbar [data-theme-choice="coda"]');
     if (!destination?.animate) return;
     activeFlight?.cancel();
-    const end = destination.getBoundingClientRect();
-    const origin = event.detail.origin || end;
+    // Work in the page's CSS px: the flight is drawn inside the zoomed document.
+    const zoom = window.PortfolioZoom(), scaled = r => ({x:r.x/zoom,y:r.y/zoom,width:r.width/zoom,height:r.height/zoom});
+    const end = scaled(destination.getBoundingClientRect());
+    const origin = event.detail.origin ? scaled(event.detail.origin) : end;
     const startX = origin.x + origin.width/2 - end.width/2;
     const startY = origin.y + origin.height/2 - end.height/2;
     const flight = document.createElement('div');
@@ -44,12 +46,12 @@
     const frames = Array.from({length:41}, (_,index) => {
       const t = index / 40;
       const arc = Math.sin(Math.PI * t);
-      const orbit = arc * Math.min(65,window.innerWidth * .12);
+      const orbit = arc * Math.min(65,window.innerWidth / zoom * .12);
       const x = startX + (end.x-startX)*t + Math.sin(t*Math.PI*2)*orbit;
       const y = startY + (end.y-startY)*t - arc*45 + Math.cos(t*Math.PI*2)*orbit*.55;
       const rotation = Math.sin(t*Math.PI*2)*28;
       const scale = .55 + .45*t + arc*.28;
-      return {offset:t,opacity:Math.min(1,.25+t*10),transform:`translate3d(${Math.max(4,Math.min(window.innerWidth-end.width-4,x))}px,${Math.max(4,y)}px,0) rotate(${rotation}deg) scale(${scale})`};
+      return {offset:t,opacity:Math.min(1,.25+t*10),transform:`translate3d(${Math.max(4,Math.min(window.innerWidth/zoom-end.width-4,x))}px,${Math.max(4,y)}px,0) rotate(${rotation}deg) scale(${scale})`};
     });
     const animation = flight.animate(frames,{duration:950,easing:'cubic-bezier(.3,0,.2,1)'});
     activeFlight = animation;

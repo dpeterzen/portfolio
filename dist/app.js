@@ -33,8 +33,8 @@ function stopWindowEffect(id) {
 function animateWindowVisibility(id,app,task,show,fromTask,ghost,rect) {
   const target = show ? app : ghost;
   if (!target?.animate) { ghost?.remove(); return; }
-  const taskRect = task.getBoundingClientRect();
-  const dock = `translate(${taskRect.x + taskRect.width/2 - rect.x - rect.width/2}px, ${taskRect.y + taskRect.height/2 - rect.y - rect.height/2}px) scale(.12)`;
+  const taskRect = task.getBoundingClientRect(), zoom = window.PortfolioZoom();
+  const dock = `translate(${(taskRect.x + taskRect.width/2 - rect.x - rect.width/2)/zoom}px, ${(taskRect.y + taskRect.height/2 - rect.y - rect.height/2)/zoom}px) scale(.12)`;
   const frames = show
     ? [{opacity:0,transform:fromTask ? dock : 'translateY(7px) scale(.97)'}, {opacity:1,transform:'scale(1.006)',offset:.76}, {opacity:1,transform:'none'}]
     : [{opacity:1,transform:'none'}, {opacity:0,transform:fromTask ? dock : 'translateY(3px) scale(.98)'}];
@@ -92,7 +92,7 @@ function makeWindow(entry,index) {
   if(entry.game) app.classList.add('game-window');
   const width=entry.game?(entry.id==='snake'?530:650):entry.id==='notes'?570:entry.id==='terminal'?580:entry.id==='letter'?510:entry.project?740:entry.id==='about'?450:entry.id==='guestbook'?440:490;
   const height=entry.game?650:entry.id==='notes'?590:entry.id==='terminal'?410:entry.id==='letter'?480:entry.project?490:entry.id==='about'?400:entry.id==='guestbook'?540:510;
-  const area=workspace.getBoundingClientRect();
+  const area={width:workspace.clientWidth,height:workspace.clientHeight};
   app.style.width=`${Math.min(width,area.width-24)}px`; app.style.height=`${Math.min(height,area.height-28)}px`;
   app.style.left=`${Math.max(8,Math.min(235+index*22,area.width-Math.min(width,area.width-24)-16))}px`;
   app.style.top=`${Math.max(8,Math.min(65+index*19,area.height-Math.min(height,area.height-28)-12))}px`;
@@ -112,13 +112,13 @@ function makeWindow(entry,index) {
   titlebar.addEventListener('dblclick',event=>{if(!event.target.closest('button'))controlWindow(entry.id,'maximize');});
   titlebar.addEventListener('pointerdown',event=>{
     if(event.button!==0||event.target.closest('button')||model.get(entry.id).maximized||window.innerWidth<640)return;
-    const rect=app.getBoundingClientRect();drag={id:entry.id,pointer:event.pointerId,x:event.clientX,y:event.clientY,left:app.offsetLeft,top:app.offsetTop,width:rect.width,height:rect.height};
+    drag={id:entry.id,pointer:event.pointerId,x:event.clientX,y:event.clientY,zoom:window.PortfolioZoom(),left:app.offsetLeft,top:app.offsetTop,width:app.offsetWidth,height:app.offsetHeight};
     titlebar.setPointerCapture(event.pointerId);app.classList.add('dragging');event.preventDefault();
   });
   titlebar.addEventListener('pointermove',event=>{
     if(!drag||drag.id!==entry.id||event.pointerId!==drag.pointer)return;
-    app.style.left=`${Math.max(0,Math.min(workspace.clientWidth-drag.width,drag.left+event.clientX-drag.x))}px`;
-    app.style.top=`${Math.max(0,Math.min(workspace.clientHeight-drag.height,drag.top+event.clientY-drag.y))}px`;
+    app.style.left=`${Math.max(0,Math.min(workspace.clientWidth-drag.width,drag.left+(event.clientX-drag.x)/drag.zoom))}px`;
+    app.style.top=`${Math.max(0,Math.min(workspace.clientHeight-drag.height,drag.top+(event.clientY-drag.y)/drag.zoom))}px`;
   });
   function endDrag(){if(drag?.id===entry.id){drag=null;app.classList.remove('dragging');}}
   titlebar.addEventListener('pointerup',endDrag);titlebar.addEventListener('pointercancel',endDrag);titlebar.addEventListener('lostpointercapture',endDrag);

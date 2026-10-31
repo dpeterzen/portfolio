@@ -32,6 +32,8 @@
     }
     document.dispatchEvent(new CustomEvent('portfolio:theme', {detail: {theme}}));
   }
+  // The page is CSS-zoomed on very large screens; rects and pointer coordinates are in screen px.
+  window.PortfolioZoom = () => parseFloat(getComputedStyle(document.documentElement).zoom) || 1;
   window.PortfolioTheme = {
     restart() {
       unlocked = false;
